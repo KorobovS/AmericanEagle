@@ -8,3 +8,9 @@ target/
 *.iws
 *.iml
 *.ipr
+
+### Allure ###
+.allure
+
+### Log4j ###
+logs

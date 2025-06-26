@@ -1,4 +1,48 @@
-package api.test;
-
-public class UserTest {
-}
+//package api.test;
+//
+//import api.utils.BaseTest;
+//import api.utils.TestData;
+//import io.restassured.RestAssured;
+//import io.restassured.response.Response;
+//import org.testng.Assert;
+//import org.testng.annotations.Test;
+//
+//public class UserTest extends BaseTest {
+//
+//    @Test
+//    public void testCreateUser() {
+//        TestData.getAccessToken();
+//
+//        Response response = RestAssured.given()
+//                .header("accept", "application/vnd.oracle.resource+json")
+//                .header("accept-language", "ru,en-US;q=0.9,en;q=0.8")
+//                .header("aelang", "en_US")
+//                .header("aesite", "AEO_US")
+//                .header("authorization", "Bearer " + TestData.accessToken)
+//                .header("content-type", "application/json")
+//                .header("lastactivitydate", "VGh1LCAyNiBKdW4gMjAyNSAwNToxNDoxMSBHTVQ=")
+//                .header("newrelic", "eyJ2IjpbMCwxXSwiZCI6eyJ0eSI6IkJyb3dzZXIiLCJhYyI6IjI0OTg5OTgiLCJhcCI6IjExMjAxNjg0MzkiLCJpZCI6ImVhOGNiOWJiOGIzMGY1M2IiLCJ0ciI6IjYzZDNjZjY2NWU2N2I5MTg0Y2NjZmYxOTA1OTRjNGMwIiwidGkiOjE3NTA5MTQ4OTU0NzQsInRrIjoiMjA0MzQ4In19")
+//                .header("origin", "https://www.ae.com")
+//                .header("priority", "u=1, i")
+//                .header("referer", "https://www.ae.com/us/en/myaccount/create-account")
+//                .header("sec-ch-ua", "\"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"")
+//                .header("sec-ch-ua-mobile", "?0")
+//                .header("sec-ch-ua-platform", "\"Windows\"")
+//                .header("sec-fetch-dest", "empty")
+//                .header("sec-fetch-mode", "cors")
+//                .header("sec-fetch-site", "same-origin")
+//                .header("traceparent", "00-63d3cf665e67b9184cccff190594c4c0-ea8cb9bb8b30f53b-01")
+//                .header("tracestate", "204348@nr=0-1-2498998-1120168439-ea8cb9bb8b30f53b----1750914895474")
+//                .header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36")
+//                .header("x-access-token", TestData.accessToken)
+//                .header("Cookie", "TLTUID=0B5E13BD6298F6178FC12E8C7F751419; optimizelyEndUserId=9ad553f0-2b9f-45d7-be25-e0484d558411; aeoStyliticsSegment=false; aeoUserIp=109.248.173.67; aeoUserLocation=RU:; ae_clarip_consent=0,1,2,3; ae_clarip_ab_segment=true; brand=aeo; tkbl_session=9bac0df6-495f-40f5-8b28-14d0c933294e; swim_ten=e; ConstructorioID_client_id=4f0db674-c446-4997-b1d4-e54743ec0924; _ga=GA1.1.409250493.1750883146; _scid=PedyxgP0kvnt7JotI3_VyzL8PkW49oXj; cjConsent=MHxOfDB8Tnww; cjUser=20bef57e-2024-4de8-99ee-9de9492e2358; _tt_enable_cookie=1; _ttp=01JYMC98V0FVF7JR3JCG2X714Y_.tt.1; __exponea_etc__=d7973d60-2dab-4a30-8683-11de0d69ab0e; _pin_unauth=dWlkPU16YzVZMlExTWpndE9EWmhOeTAwTVRabExUazNOR1l0TlRsaU9URXpOVGMzTURVMg; _sctr=1%7C1750798800000; _ScCbts=%5B%5D; QuantumMetricUserID=acd43af1e793c9ddba58328c39faf338; _lc2_fpi=564cdb68d47c--01jymc9t5fzwhe8pkzw71m7emz; BVBRANDID=b441a21a-dc2c-4068-bcb5-8927e7d40082; granify.uuid=a933d588-aa46-498b-953c-57597ef5e3c1; granify.new_user.sxkhw=true; fita.sid.americaneagle=uOCkAbqe2rcuijv8Y1m_xGhLk98QsgHx; geuid=f0b62ee8-39ed-4de6-8574-723f4345b4d1; _gepi=true; _geps=true; optimizelySession=0; _gess=true; _getdran=3; QuantumMetricSessionID=3cfa729c963f1241d495458ce32b46a2; granify.session.sxkhw=1750914211685; akaalb_PROD_ALB=~op=PROD_LB_ALL_DCs:PROD_LB_Origin_East4_AGWA_Service_Mesh|~rv=60~m=PROD_LB_Origin_East4_AGWA_Service_Mesh:0|~os=db0ecb8ead961a2983478ea211c488b6~id=9f3627206ad955008f3b86c1f2aab7a3; ak_bmsc=01FB54871DD43BE9CC3AB1BF9A68A9C0~000000000000000000000000000000~YAAQbAxAF9sktF+XAQAAW1umqhx3hM21ITGxQ2zT4gic0I8PHttYK0bf3F4t0+afjLxIF7/5mxJBeYX5VpzqGLVcQ9GzmwFRbPKWqT3F8/Z0lm1w71ula+/F2V6YQ5EcY98ulh33+45Fsl2L4qeeM7Q7iG1fb3kscLs6BflC2YzoakTTtFcpdQC3YRA77vq1LsZ6M+thTIVwyBZP+j/7uaWND0jHP5zWdrmKhOKbR61WNMa9NTs0BIB7tvZ7xNkaSCst+Mjc5jsgvRDQU0pI8c4iOl4svKA9f9d3i1kF22HoeQl1BH9kBOO6eOLi1UQATjLOk/jLAoKZhqoLcgHF7Aa1c3AzfbcWhBMRS+uTWvm77hMCbY1mf99YCnu3ZM83/SCURJ2rPrEdnstc7IjLNE8KDe7uhHHfJpJj5IeG9RYkFBZYvyz9BFDDRE7sWVlsepVrRB0bggg=; akaalb_PROD_ALB_API=~op=PROD_LB_APICG_EAST5:PROD_LB_Origin_APICG_East5|~rv=27~m=PROD_LB_Origin_APICG_East5:0|~os=db0ecb8ead961a2983478ea211c488b6~id=f4ed636de08098eb9c61c3af37c7ac31; acquisition_location_gtm=https://www.ae.com/us/en; acquisition_value_gtm=https://www.google.com/; acquisition_value=https://www.google.com/; acquisition_location=https://www.ae.com/us/en; _br_uid_2=uid%3D9205173390598%3Av%3D17.0%3Ats%3D1750883147091%3Ahc%3D2; __rtbh.lid=%7B%22eventType%22%3A%22lid%22%2C%22id%22%3A%22QsMoMEHstCuckwydzKbX%22%2C%22expiryDate%22%3A%222026-06-26T05%3A12%3A01.626Z%22%7D; _li_dcdm_c=.ae.com; _lc2_fpi_js=564cdb68d47c--01jymc9t5fzwhe8pkzw71m7emz; ConstructorioID_session_id=2; ConstructorioID_session={\"sessionId\":2,\"lastTime\":1750914722322}; _scid_r=NmdyxgP0kvnt7JotI3_VyzL8PkW49oXj7mfiCg; __exponea_time2__=-0.0009064674377441406; user_profile_id=undefined; __rtbh.uid=%7B%22eventType%22%3A%22uid%22%2C%22id%22%3A%22%22%2C%22expiryDate%22%3A%222026-06-26T05%3A12%3A24.117Z%22%7D; _ga_XGBGNYD4S1=GS2.1.s1750914239$o3$g1$t1750914744$j36$l0$h1723607267; aeoUserJourney=journey-user-scrolled; _geffran=2; _gecntaos=MQ==; _geaos=true; _gekf=dGVzdDJAZW1haWwucnU=; _gcl_au=1.1.1259871010.1750883147.645974153.1750914756.1750914755; bm_sz=3161A7DD51ADA797052C263D3EA03B31~YAAQbAxAF8QqtF+XAQAAOD2oqhwmoCmm0zQOFVB0n27tJdidxeZq9IUdh+9Os5hXOXsKksG7espdP1V8SQhZM/wUPRkR/FdBAaISF1j/NYlGLSL7Wn4uu9renTAkLcpLRXTpojY3deDu3/N4YMlEz8BuK0pC+3i1QBR314wvoPri3r83gds5whCjT/rb3PKqDsnhhANmPC1i6dMR6As1babUk0BuM/70udvkaFBD5QKv9YHNQhHtGcX2++/ROgx92KPnGlEjus8JcwR+0I3pYH+a3oNVcAnjR2JyTWmKxR89f/b4CkxrZL1VhOfiCQLHnd9ohva0avz3ektXTIVEYOKtnDM0V7B1hJpI2haQWbxTWz4F/gnrBOO6J08KlI5ti+xq+i9sMayUz0NnyEW8W/O6R+Cx4+PIU+t9~3491137~4339248; bm_sv=60684F0FFDD15B813C01F1822076CA1F~YAAQbAxAF+cstF+XAQAAqt2oqhwiybAjiTy95mM4Ebxxn/0ZCkYRyj6QuRLHUZAJEkCjkybsbbK+NDd9kh67VjhbDFgl8s9QkK/BWorpRqP/CobL+xMgL+3ppdLl0ycIz5YUaTDEcMA2Xmukx2jbxDpf4GqniORv7Y+A15BREqOFEIVARnpSfgviUT502y7VrFk/QVYGQ5S2s10WvocLqo46SCRa4onHqyZaA9JeuHVD9lMkPNHMXkWnskE=~1; utag_main=_sn:3$_se:8$_ss:0$_st:1750916690873$v_id:0197a8c4963a0022af8a98f615040506f001806700bd0$dc_visit:3$ses_id:1750914719746%3Bexp-session$_pn:1%3Bexp-session$_prevpage:AE%3Amyaccount%3Acreate_account%3Aui%3Bexp-1750918490875$dc_event:2%3Bexp-session$dc_region:eu-central-1%3Bexp-session; _abck=CF4509D320CDADA0509FD61740AA3E99~-1~YAAQbAxAF1YttF+XAQAAFg2pqg7YW5qzqcYXwamg3hUHMyFl08DAT58Aval20clYb6a81mXBtNEIcqxzRxaFiX0y11x+vBTmU9Z++kiL+0j1U2dNElCvzHLn155K7mrtDkzF5QJcq9iA3G0VSrlBJ+0w4Y8CZ3q7rHPIdcnR4aPv2SawB4VCG9o34t9lC2yG4HrXf9Vj/jhsemKNLzdmRq5BoHGEuyyEuvBjwhjOnotkINH6ndPH+vnyCaXdTbl/uS8xsPrTFs918hzatkjwjzOBFX77V2zplMjqhmII358XaJ6C6Ngtp3/mzUH8tJXCkr4qcSB0ZwP3mr8yexRCWp/QFTdHafQfhfX0Ix6TEo4Ow4/u4vA7IsFPdcMlutzNFGeQWFqXegLMKkTxWCIIFuRxJlHMg4IFoZ1vqt7fiWYscESA3ucCl7rPN6TBJZMpw7BsXlAS9+ASJxw+n+3A85Mn+j49L+qgBnB0zGtk2XOWD1hLQh8nhO5vTlv2Gcn89pgBF+aqoNn2CTt5qf128jv7+UPTh/AbqzZAFf0u2nhl/dckC4mYsZxyq0G38t2+A0sfCWbwqESqnb9rBjE7iIIFVEaEo4CIsE6k6Gm3rziLsGwAUHiiMNscAXQLWAL5rdO6vOADzcF0zamcAh6mt9T1xNWWenVkz403bqasRNhfgLm0KhfolgGWxSc0ZXP9WCza+fjpRxBlc3qhJgCu8LUXbjsZzjqQRrKoQGC/4AAQUklsBYPTCdjB0fQ7cOcjKmRWrUFPDJBiJU2hRLi2YjQHIL5gbR3HYpnIv8VcTe0R8wqtVgjMrpOmP1m6+tHSZN4fWJIcVSSDSQ5gCR02H5j5S4Z80lVG~-1~-1~-1; ttcsid_C0HVR0KP76SVVJ0UU9SG=1750914722128::Vx4G07vVvHo5RlDFj7mX.3.1750914895279; ttcsid=1750914722130::uIKO1eeW2Ft0e1WuRfa0.3.1750914895281; TLTUID=3D38BBE6CF98C4DB811A9BF61D4B5656; _abck=CF4509D320CDADA0509FD61740AA3E99~-1~YAAQhP1zPruwN4WXAQAAlUCrqg5kveR01iJiUL6JASTgtX/k/T0rlYi8dLqUSDC7kHDMlhah1CG2YPfUzDdbBs0nUCtHZW4gr4HjaqD0uivDg5uXvwkrkc5sEN10fDdLRCxTcugGgQI8gk4kxAKm2qgDW6yBH3yKMhp36HA56cVHTlZPG5cczHHd0Z5cDPT/pNJPPskcS3jAupQk3ME+HJEVcVnCHWvaZfXTeVqAeato63z6a72onGpOEoFUM6n0MPjTNJosjAmomt/9+dLvPD7hZnjg75v7XWAW2+dL2JTLg3JXHdv+WkU+JqZ2zbjwRIeisP+nDYRLYhNLOE64C8Fg94depPAeKHmviOHCFFStOvosby0Rhe3LYNYznTPijaLZinqq8daHAfUg2VFuI3ybgl2455R4rFPsUN8oix71317lnqHuyx4W+5nrOTv3jMxLiYpr9yW0JO40n0InMtjgo2ToyypBj4Q2ARkTenadYlBgh53UT3QhzXtEMaQhYuBisq0QuSQ6ByjVNE1A6Ir9cPxf375ys2znLp2MO1vaPgTBDGCDtrqb9S0Q2Du9iBtUzAwrtFAnXo7azzvIcORsXJsutGvro0heY5kd+kILRAXALQEE/o1HDQzOR7/lyXdMLSnAg8pzDAPX9I34O6AnHBskBgw2GbzDyAwacJW7YwtvBbNUbs3JHy2npw4ox8QJ05U5cRywXzry03YVHzUvN651OlBr9He7WiBe/AwOCDUpXEWJ/tbMBMZN1x7n+Q+s8Ocdyi3CxV5nM0J2MC04+8bi8h6+b0s3aS1EIdM1Fafo7F7MP2posDkmCcHOTGtXPZzbH0/+RltDOdhvm5HuJX/arOmQvAYK3m7Wlydkz1nfSM4iKl0VoBiif+pm6CG09eTyF6KOcmAZsTKi7TOuoCy9mj52~0~-1~-1; bm_sz=3161A7DD51ADA797052C263D3EA03B31~YAAQhP1zPrywN4WXAQAAlUCrqhxp0I/s19yVPZSYFoDFKFNpTxqROlGNzlCmvW5bs597UmFEUco7bW+bhPbv6LaBlqRNVVXZS5FbQL7wP8bKuH2Klb/Q8aW4Cqy+l20qDcGhnZQkovXB7oxNLkusADuDmT9Lq25QUVTrpmxDE8VDoglkK6JpWum5s8rSk5ZyxZhIr3knJWaPassTUsRrKRBbDZnXiCaIfl2VZA2RkpXeJHob9tryiq0LDCwvhLo2+ma4CtHrhhFUARlRA0bo4CYQrdyZYVd11OTMSfzIurHWXpVfr4s56HIgBTaqDI9xmxUgQPLxWi7hv4Gt5usrcL8ZjmXkPDLOK9NabF2DoIBhN3SdA3I0OrI7Skor+RdnLijI4GYAviMSg8GuhgWfYA9YU3xfr/kBKEk7cpaticoAFQ==~3491137~4339248; akaalb_PROD_ALB_API=~op=PROD_LB_APICG_EAST5:PROD_LB_Origin_APICG_East5|~rv=43~m=PROD_LB_Origin_APICG_East5:0|~os=db0ecb8ead961a2983478ea211c488b6~id=93caea24ca310b0dd364674585b958fe")
+//                .when()
+//                .body("{\"firstName\":\"first\",\"lastName\":\"last\",\"password\":\"123456qaz\",\"confirmPassword\":\"123456qaz\",\"login\":\"Test7@email.ru\",\"phoneNumber\":\"+12345678655\",\"preferredLanguage\":\"en_US\",\"preferredCountry\":\"US\",\"emailPreferences\":[\"AE\",\"Aerie\"],\"textPreferences\":[]}")
+//                .post("https://www.ae.com/ugp-api/users/v3")
+//                .then()
+//                .extract().response();
+//        System.out.println(response.asString());
+//
+//        Assert.assertEquals(response.getStatusCode(), 201);
+//    }
+//}

@@ -1,28 +1,31 @@
-package api;
+package api.test;
 
-import io.restassured.RestAssured;
+import api.utils.BaseTest;
+import api.utils.TestData;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.testng.Tag;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.rootPath;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 
-public class AuthTest {
+@Owner("KorobovS")
+public class AuthTest extends BaseTest {
 
     @Test
-    public void testGetTokenGuest() {
-        Response response = RestAssured.given()
-                .header("Authorization", "Basic MjBlNDI2OTAtODkzYS00ODAzLTg5ZTctODliZmI0ZWJmMmZlOjVmNDk5NDVhLTdjMTUtNDczNi05NDgxLWU4OGVkYjQwMGNkNg==")
-                .header("aelang", "en_US")
-                .header("aesite", "AEO_US")
-                .header("aecountry", "US")
-                .when()
-                .formParam("grant_type", "client_credentials")
-                .post("https://www.ae.com/ugp-api/auth/oauth/v5/token")
-                .then()
-                .extract().response();
-        System.out.println(response.body().jsonPath().getString(rootPath));
+    @Description("Получаем токен Guest")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testGetAccessToken() {
+        Response response = getAuthService().getAccessToken();
 
+        TestData.accessToken = response.body().jsonPath().getString("access_token");
+
+        Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 }
