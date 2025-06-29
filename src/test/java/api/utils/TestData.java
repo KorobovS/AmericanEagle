@@ -15,7 +15,7 @@ public final class TestData extends BaseTest {
     }
 
     public final static class BagData {
-        public static final String ITEM = "0043043660";
+        public static final String SKUID = "0043043660";
 
         public static String cartId;
         public static String itemId;

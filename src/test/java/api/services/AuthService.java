@@ -1,5 +1,6 @@
 package api.services;
 
+import api.utils.TestData;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -11,6 +12,7 @@ public class AuthService extends BaseService {
                 .formParam("grant_type", "client_credentials");
 
         Response response = apiClient.post("auth/oauth/v5/token", requestSpecification);
+        TestData.accessToken = response.body().jsonPath().getString("access_token");
         initRequestSpecification();
 
         return response;

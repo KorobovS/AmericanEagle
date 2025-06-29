@@ -23,8 +23,6 @@ public class AuthTest extends BaseTest {
     public void testGetAccessToken() {
         Response response = getAuthService().getAccessToken();
 
-        TestData.accessToken = response.body().jsonPath().getString("access_token");
-
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
     }
