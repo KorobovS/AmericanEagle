@@ -26,7 +26,7 @@ public class BagTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddItemToCart() {
-        Constants.getAccessToken();
+        Constants.createAccessTokenGuest();
 
         Response response = getBagService().addItemToCart(SKUID_WOMEN, 1);
 
@@ -79,7 +79,7 @@ public class BagTest extends BaseTest {
     @Tag("EndToEnd")
     public void testE2EFromCartGuest() {
 
-        Constants.getAccessToken();
+        Constants.createAccessTokenGuest();
 
         int quantity = 1;
         getBagService().addItemToCart(SKUID_WOMEN, quantity);

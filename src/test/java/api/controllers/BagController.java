@@ -21,7 +21,7 @@ public class BagController {
         requestSpecification.baseUri(BASE_URL);
         requestSpecification.filter(new AllureRestAssured());
         requestSpecification.header("aesite", "AEO_US");
-        requestSpecification.header("Authorization", "Bearer " + Constants.accessToken);
+        requestSpecification.header("Authorization", "Bearer " + Constants.accessTokenGuest);
     }
 
     @Step("Добавляю товар {skuId} в корзину")

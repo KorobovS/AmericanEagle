@@ -7,15 +7,16 @@ import java.util.Map;
 
 public final class Constants extends BaseTest {
 
-    public static String accessToken;
+    public static String accessTokenGuest;
+    public static String accessTokenUser;
     public static String BASE_URL = "https://www.ae.com/ugp-api/";
 
-    public static void getAccessToken() {
+    public static void createAccessTokenGuest() {
 
         AuthController authController = new AuthController();
 
-        accessToken = authController
-                .getAccessToken()
+        accessTokenGuest = authController
+                .getAccessTokenGuest()
                 .body().jsonPath().getString("access_token");
     }
 

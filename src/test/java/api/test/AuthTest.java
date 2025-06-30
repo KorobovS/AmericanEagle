@@ -10,17 +10,28 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.BLOCKER;
 
 @Owner("KorobovS")
 public class AuthTest extends BaseTest {
 
     @Test
     @Description("Получаем токен Guest")
-    @Severity(CRITICAL)
+    @Severity(BLOCKER)
     @Tag("Smoke")
-    public void testGetAccessToken() {
-        Response response = getAuthService().getAccessToken();
+    public void testGetAccessTokenGuest() {
+        Response response = getAuthService().getAccessTokenGuest();
+
+        Allure.step("Проверка статус кода");
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @Test
+    @Description("Получаем токен User")
+    @Severity(BLOCKER)
+    @Tag("Smoke")
+    public void testGetAccessTokenUser() {
+        Response response = getAuthService().getAccessTokenUser();
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
