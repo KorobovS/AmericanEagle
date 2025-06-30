@@ -34,17 +34,18 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-//    @Test(dependsOnMethods = "testAddItemToCart")
-//    @Description("Получаем все товары из корзины")
-//    @Severity(CRITICAL)
-//    @Tag("Smoke")
-//    public void testGetAllItemsInCart() {
-//        Response response = getBagController().getAllItemsInCart();
-//
-//        Allure.step("Проверка статус кода");
-//        Assert.assertEquals(response.getStatusCode(), 200);
-//    }
-//
+    @Test(dependsOnMethods = "testAddItemToCart")
+    @Description("Получаем все товары из корзины")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testGetAllItemsInCart() {
+        Response response = getBagUserController().getAllItemsInCartUser();
+
+        Allure.step("Проверка статус кода");
+        Assert.assertEquals(response.getStatusCode(), 200);
+        System.out.println(response.asString());
+    }
+
 //    @Test(dependsOnMethods = "testGetAllItemsInCart")
 //    @Description("Обновляем данные одного товара из корзины")
 //    @Severity(CRITICAL)

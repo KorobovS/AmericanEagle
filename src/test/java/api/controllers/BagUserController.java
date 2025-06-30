@@ -39,16 +39,16 @@ public class BagUserController {
         return response;
     }
 
-//    @Step("Получаю все товары из корзины")
-//    public Response getAllItemsInCart() {
-//        LoggerUtil.info("Получаю все товары из корзины");
-//
-//        Response response = given(requestSpecification).when().get("bag/v1");
-//        items = response.body().jsonPath().getList("data.items");
-//
-//        return response;
-//    }
-//
+    @Step("Получаю все товары из корзины")
+    public Response getAllItemsInCartUser() {
+        LoggerUtil.info("Получаю все товары из корзины");
+
+        Response response = given(requestSpecification).when().get("bag/v1");
+        items = response.body().jsonPath().getList("data.items");
+
+        return response;
+    }
+
 //    @Step("Обновляю данные о товаре {skuId} в корзине")
 //    public Response updateItemInCart(String skuId, int quantity, String itemId) {
 //        LoggerUtil.info(String.format("Обновляю данные о товаре %s в корзине", skuId));
