@@ -22,7 +22,7 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 public class BagUserTest extends BaseTest {
 
     @Test
-    @Description("Добавляем товар в корзину")
+    @Description("Добавляем товар в корзину авторизованного пользователя")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddItemToCart() {
@@ -35,7 +35,7 @@ public class BagUserTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testAddItemToCart")
-    @Description("Получаем все товары из корзины")
+    @Description("Получаем все товары из корзины авторизованного пользователя")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testGetAllItemsInCart() {
@@ -46,7 +46,7 @@ public class BagUserTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testGetAllItemsInCart")
-    @Description("Обновляем данные одного товара из корзины")
+    @Description("Обновляем данные одного товара из корзины авторизованного пользователя")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testUpdateItemInCart() {
@@ -61,7 +61,7 @@ public class BagUserTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testUpdateItemInCart")
-    @Description("Удаляем товар из корзины")
+    @Description("Удаляем товар из корзины авторизованного пользователя")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testRemoveItemFromCart() {
@@ -73,48 +73,48 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-//    @Test(priority = 1)
-//    @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
-//    @Severity(CRITICAL)
-//    @Tag("EndToEnd")
-//    public void testE2EFromCartGuest() {
-//
-//        Constants.createAccessTokenGuest();
-//
-//        int quantity = 1;
-//        getBagController().addItemToCart(SKUID_WOMEN, quantity);
-//        getBagController().addItemToCart(SKUID_MEN, quantity);
-//
-//        items = getBagController().getAllItemsInCart().body().jsonPath().getList("data.items");
-//        List<String> skuIds = new ArrayList<>(items.size());
-//        for (Map<String, Object> item : items) {
-//            skuIds.add(item.get("sku").toString());
-//        }
-//
-//        Assert.assertEquals(items.size(), 2);
-//        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
-//        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
-//
-//        int quantityNew = 9;
-//        String itemId = "";
-//        for (Map<String, Object> item : items) {
-//            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
-//                itemId = item.get("itemId").toString();
-//            }
-//        }
-//        getBagController().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
-//
-//        items = getBagController().getAllItemsInCart().body().jsonPath().getList("data.items");
-//        for (Map<String, Object> item : items) {
-//            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
-//                Assert.assertEquals(item.get("quantity"), quantityNew);
-//            }
-//        }
-//
-//        getBagController().removeItemFromCart(itemId);
-//        items = getBagController().getAllItemsInCart().body().jsonPath().getList("data.items");
-//
-//        Assert.assertEquals(items.size(), 1);
-//        Assert.assertEquals(items.get(0).get("sku"), SKUID_MEN);
-//    }
+    @Test(priority = 1)
+    @Description("Ложим 2 товара в корзину авторизованного пользователя, изменяем у одного товара количество и удаляем другой товар из корзины")
+    @Severity(CRITICAL)
+    @Tag("EndToEnd")
+    public void testE2EFromCartUser() {
+
+        Constants.createAccessTokenUser();
+
+        int quantity = 1;
+        getBagUserController().addItemToCartUser(SKUID_WOMEN, quantity);
+        getBagUserController().addItemToCartUser(SKUID_MEN, quantity);
+
+        items = getBagUserController().getAllItemsInCartUser().body().jsonPath().getList("data.items");
+        List<String> skuIds = new ArrayList<>(items.size());
+        for (Map<String, Object> item : items) {
+            skuIds.add(item.get("sku").toString());
+        }
+
+        Assert.assertEquals(items.size(), 2);
+        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
+        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
+
+        int quantityNew = 9;
+        String itemId = "";
+        for (Map<String, Object> item : items) {
+            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
+                itemId = item.get("itemId").toString();
+            }
+        }
+        getBagUserController().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
+
+        items = getBagUserController().getAllItemsInCartUser().body().jsonPath().getList("data.items");
+        for (Map<String, Object> item : items) {
+            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
+                Assert.assertEquals(item.get("quantity"), quantityNew);
+            }
+        }
+
+        getBagUserController().removeItemFromCart(itemId);
+        items = getBagUserController().getAllItemsInCartUser().body().jsonPath().getList("data.items");
+
+        Assert.assertEquals(items.size(), 1);
+        Assert.assertEquals(items.get(0).get("sku"), SKUID_MEN);
+    }
 }
