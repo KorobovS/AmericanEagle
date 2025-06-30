@@ -1,7 +1,7 @@
 package api.utils;
 
-import api.services.AuthService;
-import api.services.BagService;
+import api.controllers.AuthController;
+import api.controllers.BagController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestResult;
@@ -13,16 +13,12 @@ import java.lang.reflect.Method;
 
 public abstract class BaseTest {
 
-    protected static final Logger LOGGER = LogManager.getLogger();
-    private final BagService bagService = new BagService();
-    private final AuthService authService = new AuthService();
-
-    public BagService getBagService() {
-        return bagService;
+    public BagController getBagService() {
+        return new BagController();
     }
 
-    public AuthService getAuthService() {
-        return authService;
+    public AuthController getAuthService() {
+        return new AuthController();
     }
 
     @BeforeMethod

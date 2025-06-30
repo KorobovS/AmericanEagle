@@ -1,21 +1,20 @@
 package api.utils;
 
-import api.services.AuthService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import api.controllers.AuthController;
+
+import java.util.List;
+import java.util.Map;
 
 public final class Constants extends BaseTest {
-
-    private static final Logger LOGGER = LogManager.getLogger();
 
     public static String accessToken;
     public static String BASE_URL = "https://www.ae.com/ugp-api/";
 
     public static void getAccessToken() {
-        LOGGER.info("Получаю токен Guest");
 
-        AuthService authService = new AuthService();
-        accessToken = authService
+        AuthController authController = new AuthController();
+
+        accessToken = authController
                 .getAccessToken()
                 .body().jsonPath().getString("access_token");
     }
@@ -25,6 +24,6 @@ public final class Constants extends BaseTest {
         public static final String SKUID_MEN = "0043421387";
 
         public static String cartId;
-        public static String itemId;
+        public static List<Map<String, Object>> items;
     }
 }

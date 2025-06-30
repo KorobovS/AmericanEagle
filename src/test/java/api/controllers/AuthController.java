@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import ui.utils.LoggerUtil;
 
 import static api.utils.Constants.BASE_URL;
 import static io.restassured.RestAssured.given;
@@ -20,6 +21,9 @@ public class AuthController {
 
     @Step("Получаем токен Guest")
     public Response getAccessToken() {
+
+        LoggerUtil.info("Получаю токен Guest");
+
         requestSpecification.header("Authorization", "Basic MjBlNDI2OTAtODkzYS00ODAzLTg5ZTctODliZmI0ZWJmMmZlOjVmNDk5NDVhLTdjMTUtNDczNi05NDgxLWU4OGVkYjQwMGNkNg==")
                 .formParam("grant_type", "client_credentials");
 

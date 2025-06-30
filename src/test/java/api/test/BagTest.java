@@ -1,7 +1,7 @@
 package api.test;
 
 import api.utils.BaseTest;
-import api.utils.TestData;
+import api.utils.Constants;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
@@ -11,7 +11,11 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static api.utils.TestData.BagData;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static api.utils.Constants.BagData.*;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 @Owner("KorobovS")
@@ -22,11 +26,9 @@ public class BagTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddItemToCart() {
-        TestData.getAccessToken();
+        Constants.getAccessToken();
 
-        Response response = getBagService().addItemToCart(BagData.ITEM);
-
-        BagData.cartId = response.body().jsonPath().getString("cartId");
+        Response response = getBagService().addItemToCart(SKUID_WOMEN, 1);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
@@ -39,8 +41,6 @@ public class BagTest extends BaseTest {
     public void testGetAllItemsInCart() {
         Response response = getBagService().getAllItemsInCart();
 
-        BagData.itemId = response.body().jsonPath().getString("data.items[0].itemId");
-
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
     }
@@ -50,7 +50,11 @@ public class BagTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testUpdateItemInCart() {
-        Response response = getBagService().updateItemInCart(BagData.ITEM);
+        String skuId = (String) items.get(0).get("sku");
+        String itemId = (String) items.get(0).get("itemId");
+        int quantity = 1;
+
+        Response response = getBagService().updateItemInCart(skuId, quantity, itemId);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
@@ -61,9 +65,56 @@ public class BagTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testRemoveItemFromCart() {
-        Response response = getBagService().removeItemFromCart(BagData.itemId);
+        String itemId = (String) items.get(0).get("itemId");
+
+        Response response = getBagService().removeItemFromCart(itemId);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
+    }
+
+    @Test
+    @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
+    @Severity(CRITICAL)
+    @Tag("EndToEnd")
+    public void testE2EFromCartGuest() {
+
+        Constants.getAccessToken();
+
+        int quantity = 1;
+        getBagService().addItemToCart(SKUID_WOMEN, quantity);
+        getBagService().addItemToCart(SKUID_MEN, quantity);
+
+        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+        List<String> skuIds = new ArrayList<>(items.size());
+        for (Map<String, Object> item : items) {
+            skuIds.add(item.get("sku").toString());
+        }
+
+        Assert.assertEquals(items.size(), 2);
+        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
+        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
+
+        int quantityNew = 9;
+        String itemId = "";
+        for (Map<String, Object> item : items) {
+            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
+                itemId = item.get("itemId").toString();
+            }
+        }
+        getBagService().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
+
+        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+        for (Map<String, Object> item : items) {
+            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
+                Assert.assertEquals(item.get("quantity"), quantityNew);
+            }
+        }
+
+        getBagService().removeItemFromCart(itemId);
+        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+
+        Assert.assertEquals(items.size(), 1);
+        Assert.assertEquals(items.get(0).get("sku"), SKUID_MEN);
     }
 }
