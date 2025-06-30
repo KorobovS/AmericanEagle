@@ -52,7 +52,7 @@ public class BagTest extends BaseTest {
     public void testUpdateItemInCart() {
         String skuId = (String) items.get(0).get("sku");
         String itemId = (String) items.get(0).get("itemId");
-        int quantity = 1;
+        int quantity = 2;
 
         Response response = getBagService().updateItemInCart(skuId, quantity, itemId);
 
@@ -73,7 +73,7 @@ public class BagTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test
+    @Test(priority = 1)
     @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
     @Tag("EndToEnd")

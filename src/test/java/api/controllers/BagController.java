@@ -24,12 +24,12 @@ public class BagController {
         requestSpecification.header("Authorization", "Bearer " + Constants.accessToken);
     }
 
-    @Step("Добавляю товар {item} в корзину")
-    public Response addItemToCart(String item, int quantity) {
-        LoggerUtil.info(String.format("Добавляю товар %s в корзину", item));
+    @Step("Добавляю товар {skuId} в корзину")
+    public Response addItemToCart(String skuId, int quantity) {
+        LoggerUtil.info(String.format("Добавляю товар %s в корзину", skuId));
 
         requestSpecification.contentType(ContentType.JSON)
-                .body(String.format("{\"items\": [{\"skuId\": \"%s\", \"quantity\": %d}]}", item, quantity));
+                .body(String.format("{\"items\": [{\"skuId\": \"%s\", \"quantity\": %d}]}", skuId, quantity));
 
         Response response = given(requestSpecification).when().post("bag/v1/items");
         cartId = response.body().jsonPath().getString("cartId");
@@ -47,7 +47,7 @@ public class BagController {
         return response;
     }
 
-    @Step("Обновляю данные о товаре {item} в корзине")
+    @Step("Обновляю данные о товаре {skuId} в корзине")
     public Response updateItemInCart(String skuId, int quantity, String itemId) {
         LoggerUtil.info(String.format("Обновляю данные о товаре %s в корзине", skuId));
 
