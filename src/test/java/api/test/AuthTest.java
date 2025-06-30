@@ -1,7 +1,6 @@
 package api.test;
 
 import api.utils.BaseTest;
-import api.utils.TestData;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
