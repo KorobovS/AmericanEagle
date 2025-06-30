@@ -13,11 +13,11 @@ import static api.utils.Constants.BagData.cartId;
 import static api.utils.Constants.BagData.items;
 import static io.restassured.RestAssured.given;
 
-public class BagController {
+public class BagGuestController {
 
     private final RequestSpecification requestSpecification = given();
 
-    public BagController() {
+    public BagGuestController() {
         requestSpecification.baseUri(BASE_URL);
         requestSpecification.filter(new AllureRestAssured());
         requestSpecification.header("aesite", "AEO_US");

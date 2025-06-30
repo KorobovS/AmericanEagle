@@ -19,7 +19,7 @@ import static api.utils.Constants.BagData.*;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 @Owner("KorobovS")
-public class BagTest extends BaseTest {
+public class BagGuestTest extends BaseTest {
 
     @Test
     @Description("Добавляем товар в корзину")
@@ -28,7 +28,7 @@ public class BagTest extends BaseTest {
     public void testAddItemToCart() {
         Constants.createAccessTokenGuest();
 
-        Response response = getBagService().addItemToCart(SKUID_WOMEN, 1);
+        Response response = getBagGuestController().addItemToCart(SKUID_WOMEN, 1);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
@@ -39,7 +39,7 @@ public class BagTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testGetAllItemsInCart() {
-        Response response = getBagService().getAllItemsInCart();
+        Response response = getBagGuestController().getAllItemsInCart();
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -54,7 +54,7 @@ public class BagTest extends BaseTest {
         String itemId = (String) items.get(0).get("itemId");
         int quantity = 2;
 
-        Response response = getBagService().updateItemInCart(skuId, quantity, itemId);
+        Response response = getBagGuestController().updateItemInCart(skuId, quantity, itemId);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
@@ -67,7 +67,7 @@ public class BagTest extends BaseTest {
     public void testRemoveItemFromCart() {
         String itemId = (String) items.get(0).get("itemId");
 
-        Response response = getBagService().removeItemFromCart(itemId);
+        Response response = getBagGuestController().removeItemFromCart(itemId);
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 202);
@@ -82,10 +82,10 @@ public class BagTest extends BaseTest {
         Constants.createAccessTokenGuest();
 
         int quantity = 1;
-        getBagService().addItemToCart(SKUID_WOMEN, quantity);
-        getBagService().addItemToCart(SKUID_MEN, quantity);
+        getBagGuestController().addItemToCart(SKUID_WOMEN, quantity);
+        getBagGuestController().addItemToCart(SKUID_MEN, quantity);
 
-        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
         List<String> skuIds = new ArrayList<>(items.size());
         for (Map<String, Object> item : items) {
             skuIds.add(item.get("sku").toString());
@@ -102,17 +102,17 @@ public class BagTest extends BaseTest {
                 itemId = item.get("itemId").toString();
             }
         }
-        getBagService().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
+        getBagGuestController().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
 
-        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
         for (Map<String, Object> item : items) {
             if (item.get("sku").toString().equals(SKUID_WOMEN)) {
                 Assert.assertEquals(item.get("quantity"), quantityNew);
             }
         }
 
-        getBagService().removeItemFromCart(itemId);
-        items = getBagService().getAllItemsInCart().body().jsonPath().getList("data.items");
+        getBagGuestController().removeItemFromCart(itemId);
+        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
 
         Assert.assertEquals(items.size(), 1);
         Assert.assertEquals(items.get(0).get("sku"), SKUID_MEN);

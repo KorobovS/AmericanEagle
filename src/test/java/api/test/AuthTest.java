@@ -20,7 +20,7 @@ public class AuthTest extends BaseTest {
     @Severity(BLOCKER)
     @Tag("Smoke")
     public void testGetAccessTokenGuest() {
-        Response response = getAuthService().getAccessTokenGuest();
+        Response response = getAuthController().getAccessTokenGuest();
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -31,7 +31,7 @@ public class AuthTest extends BaseTest {
     @Severity(BLOCKER)
     @Tag("Smoke")
     public void testGetAccessTokenUser() {
-        Response response = getAuthService().getAccessTokenUser();
+        Response response = getAuthController().getAccessTokenUser();
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);

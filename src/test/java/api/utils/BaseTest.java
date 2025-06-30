@@ -1,7 +1,8 @@
 package api.utils;
 
 import api.controllers.AuthController;
-import api.controllers.BagController;
+import api.controllers.BagGuestController;
+import api.controllers.BagUserController;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,12 +12,16 @@ import java.lang.reflect.Method;
 
 public abstract class BaseTest {
 
-    public BagController getBagService() {
-        return new BagController();
+    public BagGuestController getBagGuestController() {
+        return new BagGuestController();
     }
 
-    public AuthController getAuthService() {
+    public AuthController getAuthController() {
         return new AuthController();
+    }
+
+    public BagUserController getBagUserController() {
+        return new BagUserController();
     }
 
     @BeforeMethod
