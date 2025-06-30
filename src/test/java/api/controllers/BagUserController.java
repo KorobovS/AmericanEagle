@@ -49,17 +49,17 @@ public class BagUserController {
         return response;
     }
 
-//    @Step("Обновляю данные о товаре {skuId} в корзине")
-//    public Response updateItemInCart(String skuId, int quantity, String itemId) {
-//        LoggerUtil.info(String.format("Обновляю данные о товаре %s в корзине", skuId));
-//
-//        String body = String.format("{\"items\":[{\"skuId\": \"%s\",\"quantity\":%d,\"itemId\":\"%s\"}]}", skuId, quantity, itemId);
-//
-//        requestSpecification.contentType(ContentType.JSON)
-//                .body(body);
-//
-//        return given(requestSpecification).when().patch("bag/v1/items");
-//    }
+    @Step("Обновляю данные о товаре {skuId} в корзине")
+    public Response updateItemInCart(String skuId, int quantity, String itemId) {
+        LoggerUtil.info(String.format("Обновляю данные о товаре %s в корзине", skuId));
+
+        String body = String.format("{\"items\":[{\"skuId\": \"%s\",\"quantity\":%d,\"itemId\":\"%s\"}]}", skuId, quantity, itemId);
+
+        requestSpecification.contentType(ContentType.JSON)
+                .body(body);
+
+        return given(requestSpecification).when().patch("bag/v1/items");
+    }
 
     @Step("Удаляю товар {item} из корзины")
     public Response removeItemFromCart(String item) {
