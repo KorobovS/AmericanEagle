@@ -1,4 +1,4 @@
-package api.services;
+package api.controllers;
 
 import api.utils.Constants;
 import io.qameta.allure.Step;
@@ -9,11 +9,11 @@ import io.restassured.specification.RequestSpecification;
 import static api.utils.Constants.BASE_URL;
 import static io.restassured.RestAssured.given;
 
-public class AuthService {
+public class AuthController {
 
     private final RequestSpecification requestSpecification = given();
 
-    public AuthService() {
+    public AuthController() {
         requestSpecification.baseUri(BASE_URL);
         requestSpecification.filter(new AllureRestAssured());
     }
