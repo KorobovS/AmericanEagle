@@ -60,13 +60,13 @@ public class BagUserController {
 //
 //        return given(requestSpecification).when().patch("bag/v1/items");
 //    }
-//
-//    @Step("Удаляю товар {item} из корзины")
-//    public Response removeItemFromCart(String item) {
-//        LoggerUtil.info(String.format("Удаляю товар %s из корзины", item));
-//
-//        requestSpecification.queryParam("itemIds", item);
-//
-//        return given(requestSpecification).when().delete("bag/v1/items");
-//    }
+
+    @Step("Удаляю товар {item} из корзины")
+    public Response removeItemFromCart(String item) {
+        LoggerUtil.info(String.format("Удаляю товар %s из корзины", item));
+
+        requestSpecification.queryParam("itemIds", item);
+
+        return given(requestSpecification).when().delete("bag/v1/items");
+    }
 }

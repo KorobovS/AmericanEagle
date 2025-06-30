@@ -43,7 +43,6 @@ public class BagUserTest extends BaseTest {
 
         Allure.step("Проверка статус кода");
         Assert.assertEquals(response.getStatusCode(), 200);
-        System.out.println(response.asString());
     }
 
 //    @Test(dependsOnMethods = "testGetAllItemsInCart")
@@ -60,20 +59,20 @@ public class BagUserTest extends BaseTest {
 //        Allure.step("Проверка статус кода");
 //        Assert.assertEquals(response.getStatusCode(), 202);
 //    }
-//
-//    @Test(dependsOnMethods = "testUpdateItemInCart")
-//    @Description("Удаляем товар из корзины")
-//    @Severity(CRITICAL)
-//    @Tag("Smoke")
-//    public void testRemoveItemFromCart() {
-//        String itemId = (String) items.get(0).get("itemId");
-//
-//        Response response = getBagController().removeItemFromCart(itemId);
-//
-//        Allure.step("Проверка статус кода");
-//        Assert.assertEquals(response.getStatusCode(), 202);
-//    }
-//
+
+    @Test(dependsOnMethods = "testGetAllItemsInCart")
+    @Description("Удаляем товар из корзины")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testRemoveItemFromCart() {
+        String itemId = (String) items.get(0).get("itemId");
+
+        Response response = getBagUserController().removeItemFromCart(itemId);
+
+        Allure.step("Проверка статус кода");
+        Assert.assertEquals(response.getStatusCode(), 202);
+    }
+
 //    @Test(priority = 1)
 //    @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
 //    @Severity(CRITICAL)
