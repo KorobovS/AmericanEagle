@@ -8,15 +8,13 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.testng.Tag;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import static api.steps.BagGuestSteps.getItemIdBySkuId;
+import static api.utils.Assert.checkItemIsInCart;
 import static api.utils.Constants.BagData.*;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static org.testng.Assert.assertEquals;
 
 @Owner("KorobovS")
 public class BagGuestTest extends BaseTest {
@@ -31,7 +29,7 @@ public class BagGuestTest extends BaseTest {
         Response response = getBagGuestController().addItemToCart(SKUID_WOMEN, 1);
 
         Allure.step("Проверка статус кода");
-        Assert.assertEquals(response.getStatusCode(), 202);
+        assertEquals(response.getStatusCode(), 202);
     }
 
     @Test(dependsOnMethods = "testAddItemToCart")
@@ -42,7 +40,7 @@ public class BagGuestTest extends BaseTest {
         Response response = getBagGuestController().getAllItemsInCart();
 
         Allure.step("Проверка статус кода");
-        Assert.assertEquals(response.getStatusCode(), 200);
+        assertEquals(response.getStatusCode(), 200);
     }
 
     @Test(dependsOnMethods = "testGetAllItemsInCart")
@@ -57,7 +55,7 @@ public class BagGuestTest extends BaseTest {
         Response response = getBagGuestController().updateItemInCart(skuId, quantity, itemId);
 
         Allure.step("Проверка статус кода");
-        Assert.assertEquals(response.getStatusCode(), 202);
+        assertEquals(response.getStatusCode(), 202);
     }
 
     @Test(dependsOnMethods = "testUpdateItemInCart")
@@ -70,7 +68,7 @@ public class BagGuestTest extends BaseTest {
         Response response = getBagGuestController().removeItemFromCart(itemId);
 
         Allure.step("Проверка статус кода");
-        Assert.assertEquals(response.getStatusCode(), 202);
+        assertEquals(response.getStatusCode(), 202);
     }
 
     @Test(priority = 1)
@@ -85,36 +83,24 @@ public class BagGuestTest extends BaseTest {
         getBagGuestController().addItemToCart(SKUID_WOMEN, quantity);
         getBagGuestController().addItemToCart(SKUID_MEN, quantity);
 
-        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
-        List<String> skuIds = new ArrayList<>(items.size());
-        for (Map<String, Object> item : items) {
-            skuIds.add(item.get("sku").toString());
-        }
-
-        Assert.assertEquals(items.size(), 2);
-        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
-        Assert.assertTrue(skuIds.contains(SKUID_WOMEN));
+        getBagGuestController().getAllItemsInCart();
+        Allure.step("Проверяю количество товаров в корзине");
+        assertEquals(items.size(), 2);
+        checkItemIsInCart(SKUID_WOMEN, quantity);
+        checkItemIsInCart(SKUID_MEN, quantity);
 
         int quantityNew = 9;
-        String itemId = "";
-        for (Map<String, Object> item : items) {
-            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
-                itemId = item.get("itemId").toString();
-            }
-        }
+        String itemId = getItemIdBySkuId(SKUID_WOMEN);
         getBagGuestController().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
 
-        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
-        for (Map<String, Object> item : items) {
-            if (item.get("sku").toString().equals(SKUID_WOMEN)) {
-                Assert.assertEquals(item.get("quantity"), quantityNew);
-            }
-        }
+        getBagGuestController().getAllItemsInCart();
+        checkItemIsInCart(SKUID_WOMEN, quantityNew);
 
         getBagGuestController().removeItemFromCart(itemId);
-        items = getBagGuestController().getAllItemsInCart().body().jsonPath().getList("data.items");
 
-        Assert.assertEquals(items.size(), 1);
-        Assert.assertEquals(items.get(0).get("sku"), SKUID_MEN);
+        getBagGuestController().getAllItemsInCart();
+        Allure.step("Проверяю количество товаров в корзине");
+        assertEquals(items.size(), 1);
+        checkItemIsInCart(SKUID_MEN, quantity);
     }
 }
