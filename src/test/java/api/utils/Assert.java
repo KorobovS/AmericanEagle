@@ -9,7 +9,7 @@ import static api.utils.Constants.BagData.items;
 public class Assert {
 
     @Step("Проверка В корзине находится товар {skuId} в количестве {quantity}")
-    public static void checkItemIsInCart(String skuId, int quantity) {
+    public static void assertItemIsInCart(String skuId, int quantity) {
 
         for (Map<String, Object> item : items) {
             if (item.get("sku").toString().equals(skuId)) {

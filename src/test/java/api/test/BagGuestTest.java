@@ -1,7 +1,6 @@
 package api.test;
 
 import api.utils.BaseTest;
-import api.utils.Constants;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
@@ -11,8 +10,9 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static api.steps.BagGuestSteps.getItemIdBySkuId;
-import static api.utils.Assert.checkItemIsInCart;
+import static api.utils.Assert.assertItemIsInCart;
 import static api.utils.Constants.BagData.*;
+import static api.utils.Constants.createAccessTokenGuest;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.testng.Assert.assertEquals;
 
@@ -24,7 +24,7 @@ public class BagGuestTest extends BaseTest {
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddItemToCart() {
-        Constants.createAccessTokenGuest();
+        createAccessTokenGuest();
 
         Response response = getBagGuestController().addItemToCart(SKUID_WOMEN, 1);
 
@@ -77,7 +77,7 @@ public class BagGuestTest extends BaseTest {
     @Tag("EndToEnd")
     public void testE2EFromCartGuest() {
 
-        Constants.createAccessTokenGuest();
+        createAccessTokenGuest();
 
         int quantity = 1;
         getBagGuestController().addItemToCart(SKUID_WOMEN, quantity);
@@ -86,21 +86,21 @@ public class BagGuestTest extends BaseTest {
         getBagGuestController().getAllItemsInCart();
         Allure.step("Проверяю количество товаров в корзине");
         assertEquals(items.size(), 2);
-        checkItemIsInCart(SKUID_WOMEN, quantity);
-        checkItemIsInCart(SKUID_MEN, quantity);
+        assertItemIsInCart(SKUID_WOMEN, quantity);
+        assertItemIsInCart(SKUID_MEN, quantity);
 
         int quantityNew = 9;
         String itemId = getItemIdBySkuId(SKUID_WOMEN);
         getBagGuestController().updateItemInCart(SKUID_WOMEN, quantityNew, itemId);
 
         getBagGuestController().getAllItemsInCart();
-        checkItemIsInCart(SKUID_WOMEN, quantityNew);
+        assertItemIsInCart(SKUID_WOMEN, quantityNew);
 
         getBagGuestController().removeItemFromCart(itemId);
 
         getBagGuestController().getAllItemsInCart();
         Allure.step("Проверяю количество товаров в корзине");
         assertEquals(items.size(), 1);
-        checkItemIsInCart(SKUID_MEN, quantity);
+        assertItemIsInCart(SKUID_MEN, quantity);
     }
 }
