@@ -75,7 +75,7 @@ public class BagGuestTest extends BaseTest {
     @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
     @Tag("EndToEnd")
-    public void testE2EFromCartGuest() {
+    public void testCRUDCartGuest() {
 
         createAccessTokenGuest();
 
