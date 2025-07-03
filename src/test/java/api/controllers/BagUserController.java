@@ -6,7 +6,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import ui.utils.LoggerUtil;
+import utils.LoggerUtil;
 
 import static api.utils.Constants.BASE_URL;
 import static api.utils.Constants.BagData.cartId;

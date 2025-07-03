@@ -3,6 +3,7 @@ package ui.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import utils.LoggerUtil;
 
 import java.time.Duration;
 

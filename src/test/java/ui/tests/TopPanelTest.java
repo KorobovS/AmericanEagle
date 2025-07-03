@@ -3,14 +3,12 @@ package ui.tests;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import ui.utils.BaseTest;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 @Owner("KorobovS")
-@Ignore
 public class TopPanelTest extends BaseTest {
 
     @Test
