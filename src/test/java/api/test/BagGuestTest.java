@@ -1,6 +1,7 @@
 package api.test;
 
 import api.utils.BaseTest;
+import api.utils.TestData;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
@@ -102,5 +103,18 @@ public class BagGuestTest extends BaseTest {
         Allure.step("Проверяю количество товаров в корзине");
         assertEquals(items.size(), 1);
         assertItemIsInCart(SKUID_MEN, quantity);
+    }
+
+    @Test(priority = 1, dataProvider = "dataShipping", dataProviderClass = TestData.class)
+    @Description("Проверка стоимость досавки в зависимости от суммы товаров в корзине")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testShipping(int quantity, double expected) {
+        createAccessTokenGuest();
+
+        getBagGuestController().addItemToCart(SKUID_WOMEN, quantity);
+        double actual = getBagGuestController().getAllItemsInCart().body().jsonPath().getDouble("data.summary.shipping");
+
+        assertEquals(actual, expected);
     }
 }
