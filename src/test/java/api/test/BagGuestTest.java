@@ -8,6 +8,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.testng.Tag;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static api.steps.BagGuestSteps.getItemIdBySkuId;
@@ -106,7 +107,7 @@ public class BagGuestTest extends BaseTest {
     }
 
     @Test(priority = 1, dataProvider = "dataShipping", dataProviderClass = TestData.class)
-    @Description("Проверка стоимость досавки в зависимости от суммы товаров в корзине")
+    @Description("Проверка стоимости досавки в зависимости от суммы товаров в корзине")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testShipping(int quantity, double expected) {
@@ -116,5 +117,21 @@ public class BagGuestTest extends BaseTest {
         double actual = getBagGuestController().getAllItemsInCart().body().jsonPath().getDouble("data.summary.shipping");
 
         assertEquals(actual, expected);
+    }
+
+    @Test(priority = 1, dataProvider = "dataUpdate", dataProviderClass = TestData.class)
+    @Description("При обновлении данных товара пытаемся изменить сам товар или задать колличесво одного товара больше 10")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testUpdateItemInCartNegative(String skuId, int quantity) {
+        createAccessTokenGuest();
+
+        getBagGuestController().addItemToCart(SKUID_WOMEN, 1);
+        getBagGuestController().getAllItemsInCart();
+        String itemId = (String) items.get(0).get("itemId");
+
+        Response response = getBagGuestController().updateItemInCart(skuId, quantity, itemId);
+
+        Assert.assertNotEquals(response.getStatusCode(), 202);
     }
 }
