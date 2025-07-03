@@ -3,6 +3,7 @@ package api.utils;
 import api.controllers.AuthController;
 import api.controllers.BagGuestController;
 import api.controllers.BagUserController;
+import api.controllers.ProductGuestController;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,6 +23,10 @@ public abstract class BaseTest {
 
     public BagUserController getBagUserController() {
         return new BagUserController();
+    }
+
+    public ProductGuestController getProductGuestController() {
+        return new ProductGuestController();
     }
 
     @BeforeMethod

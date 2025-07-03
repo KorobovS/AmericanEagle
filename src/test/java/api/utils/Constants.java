@@ -1,6 +1,8 @@
 package api.utils;
 
 import api.controllers.AuthController;
+import api.models.Product;
+import api.models.Sku;
 
 import java.util.List;
 import java.util.Map;
@@ -38,5 +40,12 @@ public final class Constants extends BaseTest {
 
         public static String cartId;
         public static List<Map<String, Object>> items;
+    }
+
+    public final static class ProductData {
+        public static final String CODE_PRODUCT = "0153_2885_020";
+        public static final String SCUID_PRODUCT = "0043043645";
+        public static Product product;
+        public static Sku productToCart;
     }
 }

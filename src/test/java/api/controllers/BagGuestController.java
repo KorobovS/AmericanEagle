@@ -1,5 +1,6 @@
 package api.controllers;
 
+import api.models.Sku;
 import api.utils.Constants;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -11,6 +12,7 @@ import ui.utils.LoggerUtil;
 import static api.utils.Constants.BASE_URL;
 import static api.utils.Constants.BagData.cartId;
 import static api.utils.Constants.BagData.items;
+import static api.utils.Constants.ProductData.productToCart;
 import static io.restassured.RestAssured.given;
 
 public class BagGuestController {
@@ -43,6 +45,7 @@ public class BagGuestController {
 
         Response response = given(requestSpecification).when().get("bag/v1");
         items = response.body().jsonPath().getList("data.items");
+        productToCart = response.body().jsonPath().getObject("data.items[0]", Sku.class);
 
         return response;
     }
