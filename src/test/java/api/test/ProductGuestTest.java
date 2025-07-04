@@ -4,6 +4,7 @@ import api.models.Sku;
 import api.steps.ProductSteps;
 import api.utils.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.testng.Tag;
@@ -16,6 +17,7 @@ import static api.utils.Constants.createAccessTokenGuest;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 @Owner("KorobovS")
+@Feature("API")
 public class ProductGuestTest extends BaseTest {
 
     @Test

@@ -2,10 +2,7 @@ package api.test;
 
 import api.utils.BaseTest;
 import api.utils.TestData;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Description;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
+import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -19,6 +16,7 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.testng.Assert.assertEquals;
 
 @Owner("KorobovS")
+@Feature("API")
 public class BagGuestTest extends BaseTest {
 
     @Test

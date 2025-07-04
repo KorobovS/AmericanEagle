@@ -4,11 +4,13 @@ import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ui.pages.TopPanel;
 import ui.utils.BaseTest;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
 @Owner("KorobovS")
+@Feature("UI")
 public class TopPanelTest extends BaseTest {
 
     @Test
@@ -17,8 +19,8 @@ public class TopPanelTest extends BaseTest {
     @TmsLink("US-1")
     public void testSearchIcon() {
 
-        Allure.step("Кликаем по кнопке 'search'");
-        getDriver().findElement(By.name("search-cta")).click();
+        Allure.step("Кликаем по иконке 'search'");
+        new TopPanel(getDriver()).searchIconClick();
 
         Allure.step("Проверяем появление окна 'Search'");
         Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetraySearch']")));
@@ -30,8 +32,8 @@ public class TopPanelTest extends BaseTest {
     @TmsLink("US-1")
     public void testAccountIcon() {
 
-        Allure.step("Кликаем по кнопке 'account'");
-        getDriver().findElement(By.xpath("//a[@class='clickable qa-show-sidetray-account sidetray-account']/..")).click();
+        Allure.step("Кликаем по иконке 'account'");
+        new TopPanel(getDriver()).accountIconClick();
 
         Allure.step("Проверяем появление окна 'Account'");
         Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetrayAccount']")));
@@ -43,8 +45,8 @@ public class TopPanelTest extends BaseTest {
     @TmsLink("US-1")
     public void testFavoritesIcon() {
 
-        Allure.step("Кликаем по кнопке 'favorites'");
-        getDriver().findElement(By.id("ember3")).click();
+        Allure.step("Кликаем по иконке 'favorites'");
+        new TopPanel(getDriver()).favoritesIconClick();
 
         Allure.step("Проверяем загрузку стараницы 'Favorites' с состветсвенным url");
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.ae.com/us/en/favorites");
@@ -58,8 +60,8 @@ public class TopPanelTest extends BaseTest {
     @TmsLink("US-1")
     public void testCartIcon() {
 
-        Allure.step("Кликаем по кнопке 'cart'");
-        getDriver().findElement(By.id("ember4")).click();
+        Allure.step("Кликаем по иконке 'cart'");
+        new TopPanel(getDriver()).cartIconClick();
 
         Allure.step("Проверяем название стараницы 'Shopping Bag'");
         Assert.assertEquals(getDriver().findElement(By.tagName("h1")).getText(), "Shopping Bag");
