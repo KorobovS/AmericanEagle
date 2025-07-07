@@ -1,5 +1,6 @@
 package ui.utils;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,5 +25,6 @@ public class ProjectUtils {
     static {
         CHROME_OPTIONS = new ChromeOptions();
         CHROME_OPTIONS.addArguments("--window-size=1920,1080");
+        CHROME_OPTIONS.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
 }

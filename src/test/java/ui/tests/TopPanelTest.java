@@ -4,7 +4,7 @@ import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ui.pages.TopPanel;
+import ui.pages.HomePage;
 import ui.utils.BaseTest;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -16,11 +16,10 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'search' появляется окно 'Search'")
     @Severity(CRITICAL)
-    @TmsLink("US-1")
     public void testSearchIcon() {
 
         Allure.step("Кликаем по иконке 'search'");
-        new TopPanel(getDriver()).searchIconClick();
+        new HomePage(getDriver()).searchIconClick();
 
         Allure.step("Проверяем появление окна 'Search'");
         Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetraySearch']")));
@@ -29,11 +28,10 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'account' появляется окно 'Account'")
     @Severity(CRITICAL)
-    @TmsLink("US-1")
     public void testAccountIcon() {
 
         Allure.step("Кликаем по иконке 'account'");
-        new TopPanel(getDriver()).accountIconClick();
+        new HomePage(getDriver()).accountIconClick();
 
         Allure.step("Проверяем появление окна 'Account'");
         Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetrayAccount']")));
@@ -42,11 +40,10 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'favorites' загружается стараница 'Favorites'")
     @Severity(CRITICAL)
-    @TmsLink("US-1")
     public void testFavoritesIcon() {
 
         Allure.step("Кликаем по иконке 'favorites'");
-        new TopPanel(getDriver()).favoritesIconClick();
+        new HomePage(getDriver()).favoritesIconClick();
 
         Allure.step("Проверяем загрузку стараницы 'Favorites' с состветсвенным url");
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.ae.com/us/en/favorites");
@@ -57,11 +54,10 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'cart' загружается стараница 'Shopping Bag'")
     @Severity(CRITICAL)
-    @TmsLink("US-1")
     public void testCartIcon() {
 
         Allure.step("Кликаем по иконке 'cart'");
-        new TopPanel(getDriver()).cartIconClick();
+        new HomePage(getDriver()).cartIconClick();
 
         Allure.step("Проверяем название стараницы 'Shopping Bag'");
         Assert.assertEquals(getDriver().findElement(By.tagName("h1")).getText(), "Shopping Bag");
