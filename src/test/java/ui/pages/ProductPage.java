@@ -64,6 +64,11 @@ public class ProductPage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(modal));
         wait.until(ExpectedConditions.elementToBeClickable(cartButton)).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         return new CartPage(driver);
     }

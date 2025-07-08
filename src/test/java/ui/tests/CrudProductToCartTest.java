@@ -27,12 +27,6 @@ public class CrudProductToCartTest extends BaseTest {
                 .addToBagButtonClick()
                 .goToCartPage();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
     }
 }
