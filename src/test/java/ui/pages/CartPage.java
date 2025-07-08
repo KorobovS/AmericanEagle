@@ -2,9 +2,8 @@ package ui.pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class HomePage extends BasePage {
-
-    public HomePage(WebDriver driver) {
+public class CartPage extends BasePage {
+    public CartPage(WebDriver driver) {
         super(driver);
     }
 }

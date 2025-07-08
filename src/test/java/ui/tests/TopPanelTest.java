@@ -18,7 +18,6 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testSearchIcon() {
 
-        Allure.step("Кликаем по иконке 'search'");
         new HomePage(getDriver()).searchIconClick();
 
         Allure.step("Проверяем появление окна 'Search'");
@@ -30,7 +29,6 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testAccountIcon() {
 
-        Allure.step("Кликаем по иконке 'account'");
         new HomePage(getDriver()).accountIconClick();
 
         Allure.step("Проверяем появление окна 'Account'");
@@ -42,7 +40,6 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testFavoritesIcon() {
 
-        Allure.step("Кликаем по иконке 'favorites'");
         new HomePage(getDriver()).favoritesIconClick();
 
         Allure.step("Проверяем загрузку стараницы 'Favorites' с состветсвенным url");
@@ -56,7 +53,6 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testCartIcon() {
 
-        Allure.step("Кликаем по иконке 'cart'");
         new HomePage(getDriver()).cartIconClick();
 
         Allure.step("Проверяем название стараницы 'Shopping Bag'");

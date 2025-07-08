@@ -1,5 +1,8 @@
 package ui.utils;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -7,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.LoggerUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
@@ -44,6 +49,19 @@ public abstract class BaseTest {
 
     @AfterMethod
     protected void afterMethod(Method method, ITestResult testResult) {
+
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File source = ts.getScreenshotAs(OutputType.FILE);
+            String destination = "screenshots/" + testResult.getName() + "_" + System.currentTimeMillis() + ".png";
+            try {
+                FileUtils.copyFile(source, new File(destination));
+                System.out.println("Скриншот сохранен в: " + destination);
+            } catch (IOException e) {
+                System.err.println("Ошибка при сохранении скриншота: " + e.getMessage());
+            }
+        }
+
         closeDriver();
 
         LoggerUtil.info(String.format("Execution time is %.3f sec%n", (testResult.getEndMillis() - testResult.getStartMillis()) / 1000.0));
