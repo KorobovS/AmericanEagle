@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ALL tests" >
+    <test name="Tests for UI">
+        <classes>
+            <class name="ui.tests.CrudProductToCartTest"/>
+            <class name="ui.tests.TopPanelTest"/>
+        </classes>
+    </test>
+</suite>
