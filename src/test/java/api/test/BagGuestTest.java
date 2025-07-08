@@ -4,6 +4,7 @@ import api.utils.BaseTest;
 import api.utils.TestData;
 import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
+import io.qameta.allure.testng.Tags;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -120,7 +121,7 @@ public class BagGuestTest extends BaseTest {
     @Test(priority = 1, dataProvider = "dataUpdate", dataProviderClass = TestData.class)
     @Description("При обновлении данных товара пытаемся изменить сам товар или задать колличесво одного товара больше 10")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Bag")})
     public void testUpdateItemInCartNegative(String skuId, int quantity) {
         createAccessTokenGuest();
 

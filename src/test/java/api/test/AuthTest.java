@@ -3,6 +3,7 @@ package api.test;
 import api.utils.BaseTest;
 import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
+import io.qameta.allure.testng.Tags;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -27,7 +28,7 @@ public class AuthTest extends BaseTest {
     @Test
     @Description("Получаем токен User")
     @Severity(BLOCKER)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testGetAccessTokenUser() {
         Response response = getAuthController().getAccessTokenUser();
 

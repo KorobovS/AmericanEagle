@@ -4,6 +4,7 @@ import api.utils.BaseTest;
 import api.utils.Constants;
 import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
+import io.qameta.allure.testng.Tags;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class BagUserTest extends BaseTest {
     @Test
     @Description("Добавляем товар в корзину авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testAddItemToCart() {
         Constants.createAccessTokenUser();
 
@@ -35,7 +36,7 @@ public class BagUserTest extends BaseTest {
     @Test(dependsOnMethods = "testAddItemToCart")
     @Description("Получаем все товары из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testGetAllItemsInCart() {
         Response response = getBagUserController().getAllItemsInCartUser();
 
@@ -46,7 +47,7 @@ public class BagUserTest extends BaseTest {
     @Test(dependsOnMethods = "testGetAllItemsInCart")
     @Description("Обновляем данные одного товара из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testUpdateItemInCart() {
         String skuId = (String) items.get(0).get("sku");
         String itemId = (String) items.get(0).get("itemId");
@@ -61,7 +62,7 @@ public class BagUserTest extends BaseTest {
     @Test(dependsOnMethods = "testUpdateItemInCart")
     @Description("Удаляем товар из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testRemoveItemFromCart() {
         String itemId = (String) items.get(0).get("itemId");
 
@@ -74,7 +75,7 @@ public class BagUserTest extends BaseTest {
     @Test(priority = 1)
     @Description("Ложим 2 товара в корзину авторизованного пользователя, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
-    @Tag("EndToEnd")
+    @Tags({@Tag("EndToEnd"), @Tag("Defect")})
     public void testE2EFromCartUser() {
 
         Constants.createAccessTokenUser();
