@@ -2,11 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All test" >
     <test name="Tests for API">
-        <classes>
-            <class name="api.test.AuthTest"/>
-            <class name="api.test.BagGuestTest"/>
-            <class name="api.test.BagUserTest"/>
-            <class name="api.test.ProductGuestTest"/>
-        </classes>
+        <groups>
+            <run>
+                <exclude name="Bag"/>
+                <exclude name="Defect"/>
+                <include name="Smoke"/>
+                <include name="EndToEnd"/>
+            </run>
+        </groups>
+<!--        <classes>-->
+<!--            <class name="api.test.AuthTest"/>-->
+<!--            <class name="api.test.BagGuestTest"/>-->
+<!--            <class name="api.test.BagUserTest"/>-->
+<!--            <class name="api.test.ProductGuestTest"/>-->
+<!--        </classes>-->
     </test>
 </suite>
