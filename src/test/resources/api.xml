@@ -10,11 +10,11 @@
                 <include name="EndToEnd"/>
             </run>
         </groups>
-<!--        <classes>-->
-<!--            <class name="api.test.AuthTest"/>-->
-<!--            <class name="api.test.BagGuestTest"/>-->
-<!--            <class name="api.test.BagUserTest"/>-->
-<!--            <class name="api.test.ProductGuestTest"/>-->
-<!--        </classes>-->
+        <classes>
+            <class name="api.test.AuthTest"/>
+            <class name="api.test.BagGuestTest"/>
+            <class name="api.test.BagUserTest"/>
+            <class name="api.test.ProductGuestTest"/>
+        </classes>
     </test>
 </suite>
