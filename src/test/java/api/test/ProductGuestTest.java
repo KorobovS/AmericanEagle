@@ -20,10 +20,10 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 @Feature("API")
 public class ProductGuestTest extends BaseTest {
 
-    @Test
+    @Test(groups = "smoke")
     @Description("Получаю данные о товаре")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testGetProduct() {
         createAccessTokenGuest();
 
@@ -32,10 +32,10 @@ public class ProductGuestTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test
+    @Test(groups = "smoke")
     @Description("Проверка характеристик товара до и после помещения в корзину")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testProductToCart() {
         createAccessTokenGuest();
 

@@ -20,10 +20,10 @@ import static org.testng.Assert.assertEquals;
 @Feature("API")
 public class BagGuestTest extends BaseTest {
 
-    @Test
+    @Test(groups = "smoke")
     @Description("Добавляем товар в корзину")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testAddItemToCart() {
         createAccessTokenGuest();
 
@@ -33,10 +33,11 @@ public class BagGuestTest extends BaseTest {
         assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(dependsOnMethods = "testAddItemToCart")
+    @Test(dependsOnMethods = "testAddItemToCart",
+            groups = "smoke")
     @Description("Получаем все товары из корзины")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testGetAllItemsInCart() {
         Response response = getBagGuestController().getAllItemsInCart();
 
@@ -44,10 +45,11 @@ public class BagGuestTest extends BaseTest {
         assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "testGetAllItemsInCart")
+    @Test(dependsOnMethods = "testGetAllItemsInCart",
+            groups = "smoke")
     @Description("Обновляем данные одного товара из корзины")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testUpdateItemInCart() {
         String skuId = (String) items.get(0).get("sku");
         String itemId = (String) items.get(0).get("itemId");
@@ -59,10 +61,11 @@ public class BagGuestTest extends BaseTest {
         assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(dependsOnMethods = "testUpdateItemInCart")
+    @Test(dependsOnMethods = "testUpdateItemInCart",
+            groups = "smoke")
     @Description("Удаляем товар из корзины")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testRemoveItemFromCart() {
         String itemId = (String) items.get(0).get("itemId");
 
@@ -72,10 +75,11 @@ public class BagGuestTest extends BaseTest {
         assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,
+            groups = "end2end")
     @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
-    @Tag("endToEnd")
+    @Tag("EndToEnd")
     public void testCRUDCartGuest() {
 
         createAccessTokenGuest();
@@ -105,10 +109,13 @@ public class BagGuestTest extends BaseTest {
         assertItemIsInCart(SKUID_MEN, quantity);
     }
 
-    @Test(priority = 1, dataProvider = "dataShipping", dataProviderClass = TestData.class)
+    @Test(priority = 1,
+            groups = "smoke",
+            dataProvider = "dataShipping",
+            dataProviderClass = TestData.class)
     @Description("Проверка стоимости досавки в зависимости от суммы товаров в корзине")
     @Severity(CRITICAL)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testShipping(int quantity, double expected) {
         createAccessTokenGuest();
 
@@ -118,10 +125,13 @@ public class BagGuestTest extends BaseTest {
         assertEquals(actual, expected);
     }
 
-    @Test(priority = 1, dataProvider = "dataUpdate", dataProviderClass = TestData.class)
+    @Test(priority = 1,
+            groups = {"smoke", "bag"},
+            dataProvider = "dataUpdate",
+            dataProviderClass = TestData.class)
     @Description("При обновлении данных товара пытаемся изменить сам товар или задать колличесво одного товара больше 10")
     @Severity(CRITICAL)
-    @Tags({@Tag("smoke"), @Tag("bag")})
+    @Tags({@Tag("Smoke"), @Tag("Bag")})
     public void testUpdateItemInCartNegative(String skuId, int quantity) {
         createAccessTokenGuest();
 

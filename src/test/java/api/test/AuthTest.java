@@ -14,10 +14,10 @@ import static io.qameta.allure.SeverityLevel.BLOCKER;
 @Feature("API")
 public class AuthTest extends BaseTest {
 
-    @Test
+    @Test(groups = "smoke")
     @Description("Получаем токен Guest")
     @Severity(BLOCKER)
-    @Tag("smoke")
+    @Tag("Smoke")
     public void testGetAccessTokenGuest() {
         Response response = getAuthController().getAccessTokenGuest();
 
@@ -25,10 +25,10 @@ public class AuthTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test
+    @Test(groups = {"smoke", "defect"})
     @Description("Получаем токен User")
     @Severity(BLOCKER)
-    @Tags({@Tag("smoke"), @Tag("defect")})
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testGetAccessTokenUser() {
         Response response = getAuthController().getAccessTokenUser();
 

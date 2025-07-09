@@ -20,10 +20,10 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 @Feature("API")
 public class BagUserTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"smoke", "defect"})
     @Description("Добавляем товар в корзину авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tags({@Tag("smoke"), @Tag("defect")})
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testAddItemToCart() {
         Constants.createAccessTokenUser();
 
@@ -33,10 +33,11 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(dependsOnMethods = "testAddItemToCart")
+    @Test(dependsOnMethods = "testAddItemToCart",
+            groups = {"smoke", "defect"})
     @Description("Получаем все товары из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tags({@Tag("smoke"), @Tag("defect")})
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testGetAllItemsInCart() {
         Response response = getBagUserController().getAllItemsInCartUser();
 
@@ -44,10 +45,11 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "testGetAllItemsInCart")
+    @Test(dependsOnMethods = "testGetAllItemsInCart",
+            groups = {"smoke", "defect"})
     @Description("Обновляем данные одного товара из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tags({@Tag("smoke"), @Tag("defect")})
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testUpdateItemInCart() {
         String skuId = (String) items.get(0).get("sku");
         String itemId = (String) items.get(0).get("itemId");
@@ -59,10 +61,11 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(dependsOnMethods = "testUpdateItemInCart")
+    @Test(dependsOnMethods = "testUpdateItemInCart",
+            groups = {"smoke", "defect"})
     @Description("Удаляем товар из корзины авторизованного пользователя")
     @Severity(CRITICAL)
-    @Tags({@Tag("smoke"), @Tag("defect")})
+    @Tags({@Tag("Smoke"), @Tag("Defect")})
     public void testRemoveItemFromCart() {
         String itemId = (String) items.get(0).get("itemId");
 
@@ -72,10 +75,11 @@ public class BagUserTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 202);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,
+            groups = {"end2end", "defect"})
     @Description("Ложим 2 товара в корзину авторизованного пользователя, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
-    @Tags({@Tag("endToEnd"), @Tag("defect")})
+    @Tags({@Tag("EndToEnd"), @Tag("Defect")})
     public void testE2EFromCartUser() {
 
         Constants.createAccessTokenUser();

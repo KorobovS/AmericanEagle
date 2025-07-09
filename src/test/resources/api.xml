@@ -7,7 +7,7 @@
                 <exclude name="bag"/>
                 <exclude name="defect"/>
                 <include name="smoke"/>
-                <include name="endToEnd"/>
+                <include name="end2end"/>
             </run>
         </groups>
         <classes>
