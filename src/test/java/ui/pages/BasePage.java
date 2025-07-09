@@ -1,6 +1,7 @@
 package ui.pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,14 +37,19 @@ public class BasePage {
     @FindBy(xpath = "//div[@class='modal-body']")
     private WebElement modal;
 
+    @FindBy(xpath = "//div[@data-test-active-logo='aeo']/a[@data-testid='xm-link']")
+    private WebElement linkCenterHomePage;
+
     @Step("Кликаю ссылку Men")
     public MenPage menLinkClick() {
+
         menLink.click();
         return new MenPage(driver);
     }
 
     @Step("Кликаю иконку поиска")
     public void searchIconClick() {
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -54,6 +60,7 @@ public class BasePage {
 
     @Step("Кликаю иконку аккаунта")
     public void accountIconClick() {
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -70,6 +77,21 @@ public class BasePage {
     @Step("Кликаю иконку корзины")
     public void cartIconClick() {
         cartIcon.click();
+    }
+
+    @Step("Перехожу на главную")
+    public HomePage goToHome() {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0)");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        linkCenterHomePage.click();
+
+        return new HomePage(driver);
     }
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

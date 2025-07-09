@@ -26,7 +26,10 @@ public class ProductPage extends BasePage {
     private WebElement sizes;
 
     @FindBy(xpath = "//div[@class='modal-dialog']//button[@name='viewBag']")
-    private WebElement cartButton;
+    private WebElement viewBagButton;
+
+    @FindBy(xpath = "//div[@class='modal-dialog']//button[@class='btn-close sidetray-close-button qa-btn-cancel']")
+    private WebElement closeModal;
 
     @FindBy(xpath = "//div[@class='modal-body']")
     private WebElement modal;
@@ -63,7 +66,7 @@ public class ProductPage extends BasePage {
     public CartPage goToCartPage() {
 
         wait.until(ExpectedConditions.elementToBeClickable(modal));
-        wait.until(ExpectedConditions.elementToBeClickable(cartButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(viewBagButton)).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -71,5 +74,19 @@ public class ProductPage extends BasePage {
         }
 
         return new CartPage(driver);
+    }
+
+    @Step("Закрываю окно Added to bag!")
+    public ProductPage closeModal() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(modal));
+        wait.until(ExpectedConditions.elementToBeClickable(closeModal)).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return this;
     }
 }
