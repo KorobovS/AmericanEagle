@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.20.1</aspectj.version>
         <versionJackson>2.18.2</versionJackson>
-        <suite>all</suite>
+        <suite>api</suite>
     </properties>
 
     <dependencies>
