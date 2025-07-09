@@ -17,7 +17,7 @@ public class AuthTest extends BaseTest {
     @Test
     @Description("Получаем токен Guest")
     @Severity(BLOCKER)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testGetAccessTokenGuest() {
         Response response = getAuthController().getAccessTokenGuest();
 
@@ -28,7 +28,7 @@ public class AuthTest extends BaseTest {
     @Test
     @Description("Получаем токен User")
     @Severity(BLOCKER)
-    @Tags({@Tag("Smoke"), @Tag("Defect")})
+    @Tags({@Tag("smoke"), @Tag("defect")})
     public void testGetAccessTokenUser() {
         Response response = getAuthController().getAccessTokenUser();
 

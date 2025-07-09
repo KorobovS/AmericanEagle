@@ -4,10 +4,10 @@
     <test name="Tests for API">
         <groups>
             <run>
-                <exclude name="Bag"/>
-                <exclude name="Defect"/>
-                <include name="Smoke"/>
-                <include name="EndToEnd"/>
+                <exclude name="bag"/>
+                <exclude name="defect"/>
+                <include name="smoke"/>
+                <include name="endToEnd"/>
             </run>
         </groups>
         <classes>

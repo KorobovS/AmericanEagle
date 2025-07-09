@@ -23,7 +23,7 @@ public class ProductGuestTest extends BaseTest {
     @Test
     @Description("Получаю данные о товаре")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testGetProduct() {
         createAccessTokenGuest();
 
@@ -35,7 +35,7 @@ public class ProductGuestTest extends BaseTest {
     @Test
     @Description("Проверка характеристик товара до и после помещения в корзину")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testProductToCart() {
         createAccessTokenGuest();
 

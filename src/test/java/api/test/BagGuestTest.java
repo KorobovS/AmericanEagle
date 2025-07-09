@@ -23,7 +23,7 @@ public class BagGuestTest extends BaseTest {
     @Test
     @Description("Добавляем товар в корзину")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testAddItemToCart() {
         createAccessTokenGuest();
 
@@ -36,7 +36,7 @@ public class BagGuestTest extends BaseTest {
     @Test(dependsOnMethods = "testAddItemToCart")
     @Description("Получаем все товары из корзины")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testGetAllItemsInCart() {
         Response response = getBagGuestController().getAllItemsInCart();
 
@@ -47,7 +47,7 @@ public class BagGuestTest extends BaseTest {
     @Test(dependsOnMethods = "testGetAllItemsInCart")
     @Description("Обновляем данные одного товара из корзины")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testUpdateItemInCart() {
         String skuId = (String) items.get(0).get("sku");
         String itemId = (String) items.get(0).get("itemId");
@@ -62,7 +62,7 @@ public class BagGuestTest extends BaseTest {
     @Test(dependsOnMethods = "testUpdateItemInCart")
     @Description("Удаляем товар из корзины")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testRemoveItemFromCart() {
         String itemId = (String) items.get(0).get("itemId");
 
@@ -75,7 +75,7 @@ public class BagGuestTest extends BaseTest {
     @Test(priority = 1)
     @Description("Ложим 2 товара в корзину, изменяем у одного товара количество и удаляем другой товар из корзины")
     @Severity(CRITICAL)
-    @Tag("EndToEnd")
+    @Tag("endToEnd")
     public void testCRUDCartGuest() {
 
         createAccessTokenGuest();
@@ -108,7 +108,7 @@ public class BagGuestTest extends BaseTest {
     @Test(priority = 1, dataProvider = "dataShipping", dataProviderClass = TestData.class)
     @Description("Проверка стоимости досавки в зависимости от суммы товаров в корзине")
     @Severity(CRITICAL)
-    @Tag("Smoke")
+    @Tag("smoke")
     public void testShipping(int quantity, double expected) {
         createAccessTokenGuest();
 
@@ -121,7 +121,7 @@ public class BagGuestTest extends BaseTest {
     @Test(priority = 1, dataProvider = "dataUpdate", dataProviderClass = TestData.class)
     @Description("При обновлении данных товара пытаемся изменить сам товар или задать колличесво одного товара больше 10")
     @Severity(CRITICAL)
-    @Tags({@Tag("Smoke"), @Tag("Bag")})
+    @Tags({@Tag("smoke"), @Tag("bag")})
     public void testUpdateItemInCartNegative(String skuId, int quantity) {
         createAccessTokenGuest();
 
