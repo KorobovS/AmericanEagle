@@ -43,6 +43,8 @@ public class BasePage {
     @Step("Кликаю ссылку Men")
     public MenPage menLinkClick() {
 
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0)");
         wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
         return new MenPage(driver);
     }

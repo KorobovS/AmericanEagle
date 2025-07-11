@@ -64,4 +64,22 @@ public class CrudProductToCartTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
     }
+
+    @Test
+    @Description("Ложу 2 товара в корзину, изменяю у одного товара количество и удаляю другой товар из корзины")
+    @Severity(CRITICAL)
+    @Tag("EndToEnd")
+    public void testCRUDCart() {
+
+        Allure.step("Взаимодействие с товарами в корзине");
+        new HomePage(getDriver())
+                .addProductToCart(1)
+                .addProductToCart(2)
+                .goToCart()
+                .updateProductToCart(2)
+                .removeProductToCart(1);
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
+        Assert.assertEquals(getDriver().findElements(By.xpath("//ul[@data-testid='commerce-items']/li")).size(), 1);
+    }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -32,6 +33,9 @@ public class CartPage extends BasePage {
 
     @FindBy(xpath = "//button[text()='Update Bag']")
     private WebElement buttonUpdateBag;
+
+    @FindAll(@FindBy(xpath = "//ul[@data-testid='commerce-items']/li"))
+    private List<WebElement> arrayProduct;
 
     @Step("Нажимаю ссылку edit в корзине")
     public CartPage clickLinkEdit() {
@@ -64,6 +68,7 @@ public class CartPage extends BasePage {
     @Step("Меняю размер продукта в корзине")
     public CartPage updateSize() {
 
+        wait.until(ExpectedConditions.elementToBeClickable(size));
         size.click();
         updateField(size, "//ul[@role='menu']/li/a");
 
@@ -99,11 +104,55 @@ public class CartPage extends BasePage {
     @Step("Меняю {field} продукта в корзине")
     public void updateField(WebElement field, String location) {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(field));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", field);
         List<WebElement> listColor = driver.findElements(By.xpath(location));
         if (listColor.size() > 1) {
             listColor.get(1).click();
         }
+    }
+
+    @Step("Обновляю {numberProductToCart} продукт в корзине")
+    public CartPage updateProductToCart(int numberProductToCart) {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement product = driver.findElement(By.xpath(String.format("(//ul[@data-testid='commerce-items']/li//button[@name='editCommerceItem'])[%s]", numberProductToCart)));
+        js.executeScript("arguments[0].scrollIntoView(true);", product);
+        product.click();
+        updateColor();
+        updateSize();
+        updateQuantity();
+        clickButtonUpdateBag();
+
+        return this;
+    }
+
+    @Step("Удаляю {numberProductToCart} продукт в корзине")
+    public CartPage removeProductToCart(int numberProductToCart) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, 0)");
+        WebElement product = driver.findElement(By.xpath(String.format("(//ul[@data-testid='commerce-items']/li//button[@name='removeCommerceItem'])[%s]", numberProductToCart)));
+        js.executeScript("arguments[0].scrollIntoView(true);", product);
+        wait.until(ExpectedConditions.elementToBeClickable(product)).click();
+        js.executeScript("window.scrollTo(0, 0)");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return this;
     }
 }
