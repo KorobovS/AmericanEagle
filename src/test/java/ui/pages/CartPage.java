@@ -15,8 +15,11 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//ul[@data-testid='commerce-items']//button[@name='editCommerceItem']")
-    private WebElement buttonEdit;
+    @FindBy(xpath = "//button[@name='editCommerceItem']")
+    private WebElement linkEdit;
+
+    @FindBy(xpath = "//button[@name='removeCommerceItem']")
+    private WebElement linkRemove;
 
     @FindBy(xpath = "//div[@class='extras-content']//div[@role='button']")
     private WebElement color;
@@ -34,8 +37,18 @@ public class CartPage extends BasePage {
     public CartPage clickLinkEdit() {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", buttonEdit);
-        buttonEdit.click();
+        js.executeScript("arguments[0].scrollIntoView(true);", linkEdit);
+        linkEdit.click();
+
+        return this;
+    }
+
+    @Step("Нажимаю ссылку remove в корзине")
+    public CartPage clickLinkRemove() {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", linkRemove);
+        linkRemove.click();
 
         return this;
     }

@@ -15,12 +15,12 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 public class CrudProductToCartTest extends BaseTest {
 
     @Test
-    @Description("Добавляем товар в корзину")
+    @Description("Добавляю товар в корзину")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddProductToCart() {
 
-        Allure.step("Добавляем товар в корзину");
+        Allure.step("Добавляю товар в корзину");
         new HomePage(getDriver())
                 .menLinkClick()
                 .productFirstClick()
@@ -32,12 +32,12 @@ public class CrudProductToCartTest extends BaseTest {
     }
 
     @Test
-    @Description("Обновляем данные о товаре в корзине")
+    @Description("Обновляю данные о товаре в корзине")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testUpdateProductToCart() {
 
-        Allure.step("Обновляем данные о товаре в корзине");
+        Allure.step("Обновляю данные о товаре в корзине");
         new HomePage(getDriver())
                 .addProductToCart(1)
                 .goToCart()
@@ -50,19 +50,18 @@ public class CrudProductToCartTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
     }
 
-//    @Test
-//    @Description("Обновляем данные о товаре в корзине")
-//    @Severity(CRITICAL)
-//    @Tag("Smoke")
-//    public void testUpdateProductToCart() {
-//
-//        Allure.step("Добавляем товар в корзину");
-//        new HomePage(getDriver())
-//                .addProductToCart(1)
-//                .goToHome()
-//                .addProductToCart(2)
-//                .goToCart();
-//
-//        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
-//    }
+    @Test
+    @Description("Удаляю товар из корзины")
+    @Severity(CRITICAL)
+    @Tag("Smoke")
+    public void testDeleteProductToCart() {
+
+        Allure.step("Удаляю товар из корзины");
+        new HomePage(getDriver())
+                .addProductToCart(1)
+                .goToCart()
+                .clickLinkRemove();
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
+    }
 }

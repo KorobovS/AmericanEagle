@@ -43,7 +43,7 @@ public class BasePage {
     @Step("Кликаю ссылку Men")
     public MenPage menLinkClick() {
 
-        menLink.click();
+        wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
         return new MenPage(driver);
     }
 
