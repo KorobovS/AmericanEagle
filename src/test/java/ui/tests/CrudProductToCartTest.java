@@ -37,13 +37,17 @@ public class CrudProductToCartTest extends BaseTest {
     @Tag("Smoke")
     public void testUpdateProductToCart() {
 
-        Allure.step("Добавляем товар в корзину");
+        Allure.step("Обновляем данные о товаре в корзине");
         new HomePage(getDriver())
                 .addProductToCart(1)
                 .goToCart()
-                .clickLinkEdit();
+                .clickLinkEdit()
+                .updateColor()
+                .updateSize()
+                .updateQuantity()
+                .clickButtonUpdateBag();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//div[@class='modal-content ']//h2")).getText(), "Edit Item");
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
     }
 
 //    @Test
