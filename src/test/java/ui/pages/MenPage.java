@@ -15,8 +15,8 @@ public class MenPage extends BasePage {
         super(driver);
     }
 
-//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
-    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
+    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
+//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
     private List<WebElement> listProducts;
 
 //    @Step("Кликаю по первому товару")
@@ -54,9 +54,9 @@ public class MenPage extends BasePage {
         Allure.step("5");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("6");
-        js.executeScript("arguments[0].scrollIntoView(true);", listProducts.get(0));
+        WebElement product = driver.findElement(By.xpath(String.format("(//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/..)[%s]", numberInProductArray)));
         Allure.step("7");
-        WebElement product = listProducts.get(numberInProductArray - 1);
+        js.executeScript("arguments[0].scrollIntoView(true);", product);
         Allure.step("8");
         product.click();
 
