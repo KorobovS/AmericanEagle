@@ -1,6 +1,7 @@
 package ui.tests;
 
 import io.qameta.allure.*;
+import io.qameta.allure.testng.Tag;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,6 +19,7 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'search' появляется окно 'Search'")
     @Severity(CRITICAL)
+    @Tag("Smoke")
     public void testSearchIcon() {
 
         new HomePage(getDriver()).searchIconClick();
@@ -29,6 +31,7 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'account' появляется окно 'Account'")
     @Severity(CRITICAL)
+    @Tag("Smoke")
     public void testAccountIcon() {
 
         new HomePage(getDriver()).accountIconClick();
@@ -40,6 +43,7 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'favorites' загружается стараница 'Favorites'")
     @Severity(CRITICAL)
+    @Tag("Smoke")
     public void testFavoritesIcon() {
 
         FavoritesPage favoritesPage = new HomePage(getDriver()).favoritesIconClick();
@@ -53,6 +57,7 @@ public class TopPanelTest extends BaseTest {
     @Test
     @Description("При клике по иконке 'cart' загружается стараница 'Shopping Bag'")
     @Severity(CRITICAL)
+    @Tag("Smoke")
     public void testCartIcon() {
 
         CartPage cartPage = new HomePage(getDriver())

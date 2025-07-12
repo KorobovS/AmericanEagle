@@ -50,12 +50,6 @@ public class BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
         js.executeScript("arguments[0].click();", menLink);
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
 
         return new MenPage(driver);
     }
@@ -98,7 +92,7 @@ public class BasePage {
     @Step("Кликаю иконку корзины")
     public CartPage cartIconClick() {
 
-        cartIcon.click();
+        wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
 
         return new CartPage(driver);
     }

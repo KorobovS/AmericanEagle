@@ -29,6 +29,7 @@ public class CrudProductToCartTest extends BaseTest {
                 .goToCartPage()
                 .getH1();
 
+        Allure.step("Проверяю актуальный Н1");
         Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
@@ -49,6 +50,7 @@ public class CrudProductToCartTest extends BaseTest {
                 .clickButtonUpdateBag()
                 .getH1();
 
+        Allure.step("Проверяю актуальный Н1");
         Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
@@ -65,6 +67,7 @@ public class CrudProductToCartTest extends BaseTest {
                 .clickLinkRemove()
                 .getH1();
 
+        Allure.step("Проверяю актуальный Н1");
         Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
@@ -82,7 +85,9 @@ public class CrudProductToCartTest extends BaseTest {
                 .updateProductToCart(2)
                 .removeProductToCart(1);
 
+        Allure.step("Проверяю актуальный Н1");
         Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
+        Allure.step("Проверяю количество товаров в корзине");
         Assert.assertEquals(cartPage.getArrayProduct().size(), 1);
     }
 }

@@ -20,15 +20,15 @@ public class MenPage extends BasePage {
     public ProductPage productFirstClick() {
 
         menLinkClick();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         wait.until(ExpectedConditions.elementToBeClickable(productFirst));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", productFirst);
-        productFirst.click();
+        js.executeScript("arguments[0].click();", productFirst);
 
         return new ProductPage(driver);
     }
