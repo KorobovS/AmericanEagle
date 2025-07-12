@@ -33,7 +33,7 @@ public class MenPage extends BasePage {
         return new ProductPage(driver);
     }
 
-    @Step("Кликаю по товару под номером {}")
+    @Step("Кликаю по товару под номером {numberInProductArray}")
     public ProductPage productClick(int numberInProductArray) {
 
         menLinkClick();

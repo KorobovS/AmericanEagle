@@ -1,5 +1,6 @@
 package ui.pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -48,10 +49,14 @@ public class BasePage {
     public MenPage menLinkClick() {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        Allure.step("1");
         js.executeScript("window.scrollTo(0, 0)");
+        Allure.step("2");
         wait.until(ExpectedConditions.elementToBeClickable(menLink));
+        Allure.step("3");
         js.executeScript("arguments[0].click();", menLink);
 
+        Allure.step("4");
         return new MenPage(driver);
     }
 
