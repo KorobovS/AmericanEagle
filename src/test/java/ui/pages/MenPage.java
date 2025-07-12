@@ -52,7 +52,7 @@ public class MenPage extends BasePage {
             throw new RuntimeException(e);
         }
         Allure.step("5");
-        WebElement product = listProduct.get(numberInProductArray);
+        WebElement product = listProduct.get(numberInProductArray - 1);
         Allure.step("6");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("7");
