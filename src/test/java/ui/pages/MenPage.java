@@ -23,15 +23,18 @@ public class MenPage extends BasePage {
     public ProductPage productFirstClick() {
 
         menLinkClick();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        Allure.step("0");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Allure.step("1");
         JavascriptExecutor js = (JavascriptExecutor) driver;
+                Allure.step("1.1");
+                WebElement element = listProduct.get(0);
         Allure.step("2");
-        js.executeScript("arguments[0].scrollIntoView(true);", listProduct.get(0));
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
         Allure.step("3");
         js.executeScript("arguments[0].click();", listProduct.get(0));
 
