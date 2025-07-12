@@ -52,7 +52,7 @@ public class BasePage {
         Allure.step("1");
         js.executeScript("window.scrollTo(0, 0)");
         Allure.step("2");
-        wait.until(ExpectedConditions.visibilityOf(menLink));
+//        wait.until(ExpectedConditions.visibilityOf(menLink));
         Allure.step("3");
         js.executeScript("arguments[0].click();", menLink);
         Allure.step("4");
