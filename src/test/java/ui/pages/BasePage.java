@@ -77,7 +77,7 @@ public class BasePage {
     @Step("Кликаю иконку понравившееся")
     public FavoritesPage favoritesIconClick() {
 
-        favoritesIcon.click();
+        wait.until(ExpectedConditions.elementToBeClickable(favoritesIcon)).click();
 
         return new FavoritesPage(driver);
     }
