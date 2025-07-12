@@ -50,9 +50,9 @@ public class BasePage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("1");
-        js.executeScript("window.scrollTo(0, 50)");
+        js.executeScript("window.scrollTo(0, 0)");
         Allure.step("2");
-        wait.until(ExpectedConditions.elementToBeClickable(menLink));
+        wait.until(ExpectedConditions.visibilityOf(menLink));
         Allure.step("3");
         js.executeScript("arguments[0].click();", menLink);
         Allure.step("4");
