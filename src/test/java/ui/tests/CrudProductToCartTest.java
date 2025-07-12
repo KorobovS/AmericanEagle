@@ -23,7 +23,7 @@ public class CrudProductToCartTest extends BaseTest {
         Allure.step("Добавляю товар в корзину");
         String actualH1 = new HomePage(getDriver())
                 .menLinkClick()
-                .productFirstClick()
+                .productClick(1)
                 .sizeFirstClick()
                 .addToBagButtonClick()
                 .goToCartPage()
