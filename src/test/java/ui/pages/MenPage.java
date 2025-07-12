@@ -48,8 +48,6 @@ public class MenPage extends BasePage {
             throw new RuntimeException(e);
         }
         Allure.step("2");
-        wait.until(ExpectedConditions.visibilityOfAllElements(listProduct));
-        Allure.step("3");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("4");
         js.executeScript("arguments[0].scrollIntoView(true);", listProduct);
