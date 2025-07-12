@@ -21,7 +21,7 @@ jobs:
       selenium:
         image: selenium/standalone-chrome:latest
         options: --shm-size 2g
-        port:
+        ports:
           - 4444:4444
 
     steps:
