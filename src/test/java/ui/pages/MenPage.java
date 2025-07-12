@@ -15,8 +15,8 @@ public class MenPage extends BasePage {
         super(driver);
     }
 
-    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
-//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
+//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
+    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
     private List<WebElement> listProduct;
 
 //    @Step("Кликаю по первому товару")
