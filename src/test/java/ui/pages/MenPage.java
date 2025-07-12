@@ -51,13 +51,12 @@ public class MenPage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        wait.until(ExpectedConditions.visibilityOfAllElements(listProducts));
         Allure.step("5");
-        WebElement product = listProducts.get(numberInProductArray - 1);
-        Allure.step("6");
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        Allure.step("6");
+        js.executeScript("arguments[0].scrollIntoView(true);", listProducts.get(0));
         Allure.step("7");
-        js.executeScript("arguments[0].scrollIntoView(true);", product);
+        WebElement product = listProducts.get(numberInProductArray - 1);
         Allure.step("8");
         product.click();
 
