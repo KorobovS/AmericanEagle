@@ -50,7 +50,7 @@ public class ProductPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(sizeFirst)).click();
 
-        return this;
+        return new ProductPage(driver);
     }
 
     @Step("Кликаю по кнопке добавить в корзину")
@@ -59,7 +59,7 @@ public class ProductPage extends BasePage {
         addToBagButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='modal-dialog']"))));
 
-        return this;
+        return new ProductPage(driver);
     }
 
     @Step("Перехожу в корзину")
