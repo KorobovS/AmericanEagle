@@ -45,7 +45,7 @@ public class MenPage extends BasePage {
     public ProductPage productClick(int numberInProductArray) {
 
         Allure.step("4");
-        menLinkClick();
+//        menLinkClick();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
