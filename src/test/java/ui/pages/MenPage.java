@@ -15,9 +15,9 @@ public class MenPage extends BasePage {
         super(driver);
     }
 
-//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
-    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
-    private List<WebElement> listProduct;
+    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/.."))
+//    @FindAll(@FindBy(xpath = "//div[@data-testid='product-content']/div/div/div/a"))
+    private List<WebElement> listProducts;
 
 //    @Step("Кликаю по первому товару")
 //    public ProductPage productFirstClick() {
@@ -51,8 +51,9 @@ public class MenPage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        wait.until(ExpectedConditions.visibilityOfAllElements(listProducts));
         Allure.step("5");
-        WebElement product = listProduct.get(numberInProductArray - 1);
+        WebElement product = listProducts.get(numberInProductArray - 1);
         Allure.step("6");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("7");
