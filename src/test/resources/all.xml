@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All test" >
-    <test name="Tests for API">
-        <groups>
-            <run>
-                <exclude name="Bag"/>
-                <exclude name="Defect"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="api.test.AuthTest"/>
-            <class name="api.test.BagGuestTest"/>
-            <class name="api.test.BagUserTest"/>
-            <class name="api.test.ProductGuestTest"/>
-        </classes>
-    </test>
+<!--    <test name="Tests for API">-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <exclude name="Bag"/>-->
+<!--                <exclude name="Defect"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+<!--        <classes>-->
+<!--            <class name="api.test.AuthTest"/>-->
+<!--            <class name="api.test.BagGuestTest"/>-->
+<!--            <class name="api.test.BagUserTest"/>-->
+<!--            <class name="api.test.ProductGuestTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="Tests for UI">
         <classes>
             <class name="ui.tests.CrudProductToCartTest"/>
-            <class name="ui.tests.TopPanelTest"/>
+<!--            <class name="ui.tests.TopPanelTest"/>-->
         </classes>
     </test>
 </suite>

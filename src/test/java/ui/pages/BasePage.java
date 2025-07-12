@@ -52,6 +52,11 @@ public class BasePage {
         Allure.step("1");
         js.executeScript("window.scrollTo(0, 0)");
         Allure.step("2");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         wait.until(ExpectedConditions.elementToBeClickable(menLink));
         Allure.step("3");
         js.executeScript("arguments[0].click();", menLink);
