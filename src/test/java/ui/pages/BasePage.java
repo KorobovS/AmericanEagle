@@ -48,6 +48,11 @@ public class BasePage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
         return new MenPage(driver);
     }
@@ -77,7 +82,12 @@ public class BasePage {
     @Step("Кликаю иконку понравившееся")
     public FavoritesPage favoritesIconClick() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(favoritesIcon)).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        favoritesIcon.click();
 
         return new FavoritesPage(driver);
     }
