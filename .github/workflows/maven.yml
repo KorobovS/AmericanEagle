@@ -17,6 +17,13 @@ jobs:
       contents: write
       pages: write
 
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        options: --shm-size 2g
+        port:
+          - 4444:4444
+
     steps:
       - name: Git clone
         uses: actions/checkout@v4
@@ -29,9 +36,9 @@ jobs:
           cache: 'maven'
 
       - name: Maven test
-        run: mvn clean test -Dsiute=api
         env:
-          CI_RUN: true
+          SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
+        run: mvn clean test -Dsiute=api
 
       - name: Get Allure history
         uses: actions/checkout@v4
