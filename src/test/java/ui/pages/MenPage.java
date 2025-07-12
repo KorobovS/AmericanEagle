@@ -25,9 +25,9 @@ public class MenPage extends BasePage {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
-        wait.until(ExpectedConditions.elementToBeClickable(productFirst));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", productFirst);
+        wait.until(ExpectedConditions.elementToBeClickable(productFirst));
         js.executeScript("arguments[0].click();", productFirst);
 
         return new ProductPage(driver);

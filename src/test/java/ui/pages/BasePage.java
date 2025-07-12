@@ -49,6 +49,7 @@ public class BasePage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
+        wait.until(ExpectedConditions.elementToBeClickable(menLink));
         js.executeScript("arguments[0].click();", menLink);
 
         return new MenPage(driver);
