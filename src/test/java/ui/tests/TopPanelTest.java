@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ui.pages.CartPage;
+import ui.pages.FavoritesPage;
 import ui.pages.HomePage;
 import ui.utils.BaseTest;
 
@@ -41,12 +42,12 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testFavoritesIcon() {
 
-        new HomePage(getDriver()).favoritesIconClick();
+        FavoritesPage favoritesPage = new HomePage(getDriver()).favoritesIconClick();
 
         Allure.step("Проверяем загрузку стараницы 'Favorites' с состветсвенным url");
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.ae.com/us/en/favorites");
+        Assert.assertEquals(favoritesPage.getCurrentUrl(), "https://www.ae.com/us/en/favorites");
         Allure.step("Проверяем название стараницы 'Favorites'");
-        Assert.assertEquals(getDriver().findElement(By.tagName("h1")).getText(), "Favorites");
+        Assert.assertEquals(favoritesPage.getH1(), "Favorites");
     }
 
     @Test
@@ -60,6 +61,6 @@ public class TopPanelTest extends BaseTest {
         Allure.step("Проверяем название стараницы 'Shopping Bag'");
         Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
         Allure.step("Проверяем загрузку стараницы 'Shopping Bag' с состветсвенным url");
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.ae.com/us/en/cart");
+        Assert.assertEquals(cartPage.getCurrentUrl(), "https://www.ae.com/us/en/cart");
     }
 }

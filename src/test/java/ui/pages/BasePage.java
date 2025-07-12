@@ -40,6 +40,9 @@ public class BasePage {
     @FindBy(xpath = "//div[@data-test-active-logo='aeo']/a[@data-testid='xm-link']")
     private WebElement linkCenterHomePage;
 
+    @FindBy(xpath = "//h1")
+    private WebElement h1;
+
     @Step("Кликаю ссылку Men")
     public MenPage menLinkClick() {
 
@@ -72,8 +75,11 @@ public class BasePage {
     }
 
     @Step("Кликаю иконку понравившееся")
-    public void favoritesIconClick() {
+    public FavoritesPage favoritesIconClick() {
+
         favoritesIcon.click();
+
+        return new FavoritesPage(driver);
     }
 
     @Step("Кликаю иконку корзины")
@@ -97,6 +103,19 @@ public class BasePage {
         linkCenterHomePage.click();
 
         return new HomePage(driver);
+    }
+
+    @Step("Получаю текст h1")
+    public String getH1() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(h1));
+
+        return h1.getText();
+    }
+
+    @Step("Получаю url страницы")
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
