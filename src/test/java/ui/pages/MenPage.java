@@ -56,7 +56,7 @@ public class MenPage extends BasePage {
         Allure.step("6");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Allure.step("7");
-        js.executeScript("arguments[0].scrollIntoView(true);", listProduct);
+        js.executeScript("arguments[0].scrollIntoView(true);", product);
         Allure.step("8");
         product.click();
 
