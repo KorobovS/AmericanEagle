@@ -77,8 +77,11 @@ public class BasePage {
     }
 
     @Step("Кликаю иконку корзины")
-    public void cartIconClick() {
+    public CartPage cartIconClick() {
+
         cartIcon.click();
+
+        return new CartPage(driver);
     }
 
     @Step("Перехожу на главную")

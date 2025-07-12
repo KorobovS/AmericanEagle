@@ -4,6 +4,7 @@ import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ui.pages.CartPage;
 import ui.pages.HomePage;
 import ui.utils.BaseTest;
 
@@ -53,10 +54,11 @@ public class TopPanelTest extends BaseTest {
     @Severity(CRITICAL)
     public void testCartIcon() {
 
-        new HomePage(getDriver()).cartIconClick();
+        CartPage cartPage = new HomePage(getDriver())
+                .cartIconClick();
 
         Allure.step("Проверяем название стараницы 'Shopping Bag'");
-        Assert.assertEquals(getDriver().findElement(By.tagName("h1")).getText(), "Shopping Bag");
+        Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
         Allure.step("Проверяем загрузку стараницы 'Shopping Bag' с состветсвенным url");
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.ae.com/us/en/cart");
     }
