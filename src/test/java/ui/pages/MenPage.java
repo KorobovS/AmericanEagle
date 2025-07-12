@@ -27,8 +27,11 @@ public class MenPage extends BasePage {
 //        } catch (InterruptedException e) {
 //            throw new RuntimeException(e);
 //        }
+        Allure.step("1");
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        Allure.step("2");
         js.executeScript("arguments[0].scrollIntoView(true);", listProduct.get(0));
+        Allure.step("3");
         js.executeScript("arguments[0].click();", listProduct.get(0));
 
         return new ProductPage(driver);
