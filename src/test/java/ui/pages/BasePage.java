@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
+
     WebDriver driver;
 
     public BasePage(WebDriver driver) {
@@ -48,12 +49,14 @@ public class BasePage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
+        js.executeScript("arguments[0].click();", menLink);
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        wait.until(ExpectedConditions.elementToBeClickable(menLink)).click();
+
         return new MenPage(driver);
     }
 
@@ -98,21 +101,6 @@ public class BasePage {
         cartIcon.click();
 
         return new CartPage(driver);
-    }
-
-    @Step("Перехожу на главную")
-    public HomePage goToHome() {
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, 0)");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        linkCenterHomePage.click();
-
-        return new HomePage(driver);
     }
 
     @Step("Получаю текст h1")
