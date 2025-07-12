@@ -35,10 +35,20 @@ jobs:
           distribution: 'corretto'
           cache: 'maven'
 
+      - name: Create screenshots directory
+        run: mkdir -p ${{ github.workspace }}/screenshots
+
       - name: Maven test
         env:
           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
         run: mvn clean test -Dsiute=api
+
+      - name: Attach screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/screenshots
 
       - name: Get Allure history
         uses: actions/checkout@v4
