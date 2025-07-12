@@ -2,9 +2,9 @@ package ui.tests;
 
 import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ui.pages.CartPage;
 import ui.pages.HomePage;
 import ui.utils.BaseTest;
 
@@ -21,14 +21,15 @@ public class CrudProductToCartTest extends BaseTest {
     public void testAddProductToCart() {
 
         Allure.step("Добавляю товар в корзину");
-        new HomePage(getDriver())
+        String actualH1 = new HomePage(getDriver())
                 .menLinkClick()
                 .productFirstClick()
                 .sizeFirstClick()
                 .addToBagButtonClick()
-                .goToCartPage();
+                .goToCartPage()
+                .getH1();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
+        Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
     @Test
@@ -38,16 +39,17 @@ public class CrudProductToCartTest extends BaseTest {
     public void testUpdateProductToCart() {
 
         Allure.step("Обновляю данные о товаре в корзине");
-        new HomePage(getDriver())
+        String actualH1 = new HomePage(getDriver())
                 .addProductToCart(1)
                 .goToCart()
                 .clickLinkEdit()
                 .updateColor()
                 .updateSize()
                 .updateQuantity()
-                .clickButtonUpdateBag();
+                .clickButtonUpdateBag()
+                .getH1();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
+        Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
     @Test
@@ -57,12 +59,13 @@ public class CrudProductToCartTest extends BaseTest {
     public void testDeleteProductToCart() {
 
         Allure.step("Удаляю товар из корзины");
-        new HomePage(getDriver())
+        String actualH1 = new HomePage(getDriver())
                 .addProductToCart(1)
                 .goToCart()
-                .clickLinkRemove();
+                .clickLinkRemove()
+                .getH1();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
+        Assert.assertEquals(actualH1, "Shopping Bag");
     }
 
     @Test
@@ -72,14 +75,14 @@ public class CrudProductToCartTest extends BaseTest {
     public void testCRUDCart() {
 
         Allure.step("Взаимодействие с товарами в корзине");
-        new HomePage(getDriver())
+        CartPage cartPage = new HomePage(getDriver())
                 .addProductToCart(1)
                 .addProductToCart(2)
                 .goToCart()
                 .updateProductToCart(2)
                 .removeProductToCart(1);
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), "Shopping Bag");
-        Assert.assertEquals(getDriver().findElements(By.xpath("//ul[@data-testid='commerce-items']/li")).size(), 1);
+        Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
+        Assert.assertEquals(cartPage.getArrayProduct().size(), 1);
     }
 }

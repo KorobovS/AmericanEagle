@@ -37,6 +37,9 @@ public class CartPage extends BasePage {
     @FindAll(@FindBy(xpath = "//ul[@data-testid='commerce-items']/li"))
     private List<WebElement> arrayProduct;
 
+    @FindBy(xpath = "//h1")
+    private WebElement h1;
+
     @Step("Нажимаю ссылку edit в корзине")
     public CartPage clickLinkEdit() {
 
@@ -154,5 +157,21 @@ public class CartPage extends BasePage {
         }
 
         return this;
+    }
+
+    @Step("Получаю текст h1")
+    public String getH1() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(h1));
+
+        return h1.getText();
+    }
+
+    @Step("Получаю список продуктов из корзины")
+    public List<WebElement> getArrayProduct() {
+
+        wait.until(ExpectedConditions.visibilityOfAllElements(arrayProduct));
+
+        return arrayProduct;
     }
 }
