@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class ProjectUtils {
 
-
     public static WebDriver createDriver() {
 
         ChromeOptions chromeOptions = new ChromeOptions();

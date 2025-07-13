@@ -18,9 +18,9 @@
     <test name="Tests for UI">
         <classes>
             <class name="ui.tests.CrudProductToCartTest">
-                <methods>
-                    <include name="testAddProductToCart"/>
-                </methods>
+<!--                <methods>-->
+<!--                    <include name="testAddProductToCart"/>-->
+<!--                </methods>-->
             </class>
 <!--            <class name="ui.tests.TopPanelTest"/>-->
         </classes>
