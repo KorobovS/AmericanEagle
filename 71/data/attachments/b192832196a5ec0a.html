@@ -1,0 +1,36 @@
+<div>POST to https://www.ae.com/ugp-api/bag/v1/items</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;items&quot;: [
+        {
+            &quot;skuId&quot;: &quot;0043270800&quot;,
+            &quot;quantity&quot;: 1
+        }
+    ]
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>aesite: AEO_US</div>
+        <div>Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1MW01N0RmbXRjNXd5b1FHX1Y2bWdEaFdVWVVFcW40bUtCa29zWWxtR25NIn0.eyJleHAiOjE3NTI0NDE4NjQsImlhdCI6MTc1MjQ0MDA2NCwianRpIjoiZDZhZDBlNjEtOGJhZS00YTE1LTgxNDUtZjQyODFlZjJjNDA1IiwiaXNzIjoiaHR0cHM6Ly9rZXNzZWwuaW50LXByLmFlLWdjcC5pby9yZWFsbXMvQUdXQSIsInN1YiI6IjU1NzZlMzdjLTZhN2YtNGM1Yy04ZDkyLTc5MDNhNWE5NzkzNyIsInR5cCI6IkJlYXJlciIsImF6cCI6IjIwZTQyNjkwLTg5M2EtNDgwMy04OWU3LTg5YmZiNGViZjJmZSIsInNjb3BlIjoiIiwib3JkZXJJZCI6WyI0NTVlYzIyMC1hODU4LTRjOGUtYWViMy01NGM3NTgwMGIxZGEiXSwicHJvZmlsZUlkIjpbImVkZDkwMzkwLWQyOTAtNDdkOS1iZDAxLWIxZTAzOTEzZTEzOSJdLCJzY29wZSI6Imd1ZXN0In0.znJWOtsapdKoymBPQ5Qgczmuza0VseMjHEsQNwyJtQ74QUW2ktpjVU5MW79Zc-YYcB4z7P8xVGP4lEYSG3bHgadFMwTY6Sx0lPvNj2KmZEEfqIC6H6NAhEvGYnF8dWhUWMGCVtBdQV8lKSPeLB7ZXL3vCBrs1dedN8fi8HJrV1G44nSPTVDc1GWSZ9DiMYbUPYYzpfS2PKixa6UuJHYRmg1stjLLM1apW7jB9Jsbcxcw52y25S8gRwdXt37YSl_RV2TIm4dmfOf7WUEi2XA-hQ0g1L3T4JA3OV7CRnBk3mTydvMJ-N-xXOXZHzaowl-6Kq300itj1jIlrkX-4BWgGw</div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://www.ae.com/ugp-api/bag/v1/items&#39; -H &#39;aesite: AEO_US&#39; -H &#39;Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ1MW01N0RmbXRjNXd5b1FHX1Y2bWdEaFdVWVVFcW40bUtCa29zWWxtR25NIn0.eyJleHAiOjE3NTI0NDE4NjQsImlhdCI6MTc1MjQ0MDA2NCwianRpIjoiZDZhZDBlNjEtOGJhZS00YTE1LTgxNDUtZjQyODFlZjJjNDA1IiwiaXNzIjoiaHR0cHM6Ly9rZXNzZWwuaW50LXByLmFlLWdjcC5pby9yZWFsbXMvQUdXQSIsInN1YiI6IjU1NzZlMzdjLTZhN2YtNGM1Yy04ZDkyLTc5MDNhNWE5NzkzNyIsInR5cCI6IkJlYXJlciIsImF6cCI6IjIwZTQyNjkwLTg5M2EtNDgwMy04OWU3LTg5YmZiNGViZjJmZSIsInNjb3BlIjoiIiwib3JkZXJJZCI6WyI0NTVlYzIyMC1hODU4LTRjOGUtYWViMy01NGM3NTgwMGIxZGEiXSwicHJvZmlsZUlkIjpbImVkZDkwMzkwLWQyOTAtNDdkOS1iZDAxLWIxZTAzOTEzZTEzOSJdLCJzY29wZSI6Imd1ZXN0In0.znJWOtsapdKoymBPQ5Qgczmuza0VseMjHEsQNwyJtQ74QUW2ktpjVU5MW79Zc-YYcB4z7P8xVGP4lEYSG3bHgadFMwTY6Sx0lPvNj2KmZEEfqIC6H6NAhEvGYnF8dWhUWMGCVtBdQV8lKSPeLB7ZXL3vCBrs1dedN8fi8HJrV1G44nSPTVDc1GWSZ9DiMYbUPYYzpfS2PKixa6UuJHYRmg1stjLLM1apW7jB9Jsbcxcw52y25S8gRwdXt37YSl_RV2TIm4dmfOf7WUEi2XA-hQ0g1L3T4JA3OV7CRnBk3mTydvMJ-N-xXOXZHzaowl-6Kq300itj1jIlrkX-4BWgGw&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;items&quot;: [
+        {
+            &quot;skuId&quot;: &quot;0043270800&quot;,
+            &quot;quantity&quot;: 1
+        }
+    ]
+}&#39;
+</div>
