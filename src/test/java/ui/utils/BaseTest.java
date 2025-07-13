@@ -1,5 +1,6 @@
 package ui.utils;
 
+import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -9,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.LoggerUtil;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -56,6 +58,14 @@ public abstract class BaseTest {
             } catch (IOException e) {
                 System.err.println("Ошибка при сохранении скриншота: " + e.getMessage());
             }
+        }
+
+        if (!testResult.isSuccess()) {
+            Allure.addAttachment(
+                    "screenshot.png",
+                    "image/png",
+                    new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES)),
+                    "png");
         }
 
         closeDriver();
