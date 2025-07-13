@@ -24,6 +24,11 @@ public class MenPage extends BasePage {
     @Step("Кликаю по товару под номером {numberInProductArray}")
     public ProductPage productClick(int numberInProductArray) {
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         menLinkClick();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         try {
