@@ -55,6 +55,8 @@ public class MenPage extends BasePage {
             throw new RuntimeException(e);
         }
         Allure.step("1");
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        Allure.step("2");
         WebElement product = driver.findElement(By.xpath(String.format("(//div[@data-testid='product-content']/div/div/div/a[@data-testid='xm-link']/div[@class='product-tile-image-container']/..)[%s]", numberInProductArray)));
         Allure.step("7");
         js.executeScript("arguments[0].scrollIntoView(true);", product);
