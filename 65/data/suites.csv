@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Добавляю товар в корзину","1023","testAddProductToCart","All test","Sun Jul 13 18:32:43 GMT 2025","broken","Sun Jul 13 18:32:44 GMT 2025","ui.tests.CrudProductToCartTest","Tests for UI","ui.tests.CrudProductToCartTest","testAddProductToCart"
