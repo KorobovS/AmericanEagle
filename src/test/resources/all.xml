@@ -4,8 +4,8 @@
     <test name="Tests for API">
         <groups>
             <run>
-                <exclude name="Bag"/>
-                <exclude name="Defect"/>
+                <exclude name="bag"/>
+                <exclude name="defect"/>
             </run>
         </groups>
         <classes>
