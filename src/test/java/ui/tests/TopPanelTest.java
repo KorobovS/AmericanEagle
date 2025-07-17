@@ -2,12 +2,9 @@ package ui.tests;
 
 import io.qameta.allure.*;
 import io.qameta.allure.testng.Tag;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ui.pages.CartPage;
-import ui.pages.FavoritesPage;
-import ui.pages.HomePage;
+import ui.pages.*;
 import ui.utils.BaseTest;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -22,10 +19,12 @@ public class TopPanelTest extends BaseTest {
     @Tag("Smoke")
     public void testSearchIcon() {
 
-        new HomePage(getDriver()).searchIconClick();
+        WindowSearch windowSearch = new HomePage(getDriver()).searchIconClick();
 
         Allure.step("Проверяем появление окна 'Search'");
-        Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetraySearch']")));
+        Assert.assertTrue(windowSearch.isVisibly());
+        Allure.step("Проверяем название окна");
+        Assert.assertEquals(windowSearch.getTitle(), "Search");
     }
 
     @Test
@@ -34,10 +33,12 @@ public class TopPanelTest extends BaseTest {
     @Tag("Smoke")
     public void testAccountIcon() {
 
-        new HomePage(getDriver()).accountIconClick();
+        WindowAccount windowAccount = new HomePage(getDriver()).accountIconClick();
 
         Allure.step("Проверяем появление окна 'Account'");
-        Assert.assertNotNull(getDriver().findElement(By.xpath("//div[@data-id='modalSidetrayAccount']")));
+        Assert.assertTrue(windowAccount.isVisibly());
+        Allure.step("Проверяем название окна");
+        Assert.assertEquals(windowAccount.getTitle(), "Account");
     }
 
     @Test

@@ -1,6 +1,5 @@
 package ui.pages;
 
-import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -56,35 +55,24 @@ public class BasePage {
     }
 
     @Step("Кликаю иконку поиска")
-    public void searchIconClick() {
+    public WindowSearch searchIconClick() {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
+
+        return new WindowSearch(driver);
     }
 
     @Step("Кликаю иконку аккаунта")
-    public void accountIconClick() {
+    public WindowAccount accountIconClick() {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         wait.until(ExpectedConditions.elementToBeClickable(accountIcon)).click();
+
+        return new WindowAccount(driver);
     }
 
     @Step("Кликаю иконку понравившееся")
     public FavoritesPage favoritesIconClick() {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         favoritesIcon.click();
 
         return new FavoritesPage(driver);
