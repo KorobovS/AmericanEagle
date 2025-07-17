@@ -44,7 +44,7 @@ public class BasePage {
     @FindBy(xpath = "//h1")
     private WebElement h1;
 
-    @Step("Кликаю ссылку Men")
+    @Step("Кликаю ссылку 'Men'")
     public MenPage menLinkClick() {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -54,7 +54,7 @@ public class BasePage {
         return new MenPage(driver);
     }
 
-    @Step("Кликаю иконку поиска")
+    @Step("Кликаю иконку 'Search")
     public WindowSearch searchIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
@@ -62,7 +62,7 @@ public class BasePage {
         return new WindowSearch(driver);
     }
 
-    @Step("Кликаю иконку аккаунта")
+    @Step("Кликаю иконку 'Account'")
     public WindowAccount accountIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(accountIcon)).click();
@@ -70,7 +70,7 @@ public class BasePage {
         return new WindowAccount(driver);
     }
 
-    @Step("Кликаю иконку понравившееся")
+    @Step("Кликаю иконку 'Favorites'")
     public FavoritesPage favoritesIconClick() {
 
         favoritesIcon.click();
@@ -78,7 +78,7 @@ public class BasePage {
         return new FavoritesPage(driver);
     }
 
-    @Step("Кликаю иконку корзины")
+    @Step("Кликаю иконку 'Cart'")
     public CartPage cartIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();

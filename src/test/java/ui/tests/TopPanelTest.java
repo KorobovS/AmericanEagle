@@ -14,7 +14,7 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 public class TopPanelTest extends BaseTest {
 
     @Test
-    @Description("При клике по иконке 'search' появляется окно 'Search'")
+    @Description("При клике по иконке 'Search' появляется окно 'Search'")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testSearchIcon() {
@@ -23,12 +23,12 @@ public class TopPanelTest extends BaseTest {
 
         Allure.step("Проверяем появление окна 'Search'");
         Assert.assertTrue(windowSearch.isVisibly());
-        Allure.step("Проверяем название окна");
+        Allure.step("Проверяем название окна 'Search");
         Assert.assertEquals(windowSearch.getTitle(), "Search");
     }
 
     @Test
-    @Description("При клике по иконке 'account' появляется окно 'Account'")
+    @Description("При клике по иконке 'Account' появляется окно 'Account'")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAccountIcon() {
@@ -42,7 +42,7 @@ public class TopPanelTest extends BaseTest {
     }
 
     @Test
-    @Description("При клике по иконке 'favorites' загружается стараница 'Favorites'")
+    @Description("При клике по иконке 'Favorites' загружается стараница 'Favorites'")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testFavoritesIcon() {
@@ -56,7 +56,7 @@ public class TopPanelTest extends BaseTest {
     }
 
     @Test
-    @Description("При клике по иконке 'cart' загружается стараница 'Shopping Bag'")
+    @Description("При клике по иконке 'Cart' загружается стараница 'Shopping Bag'")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testCartIcon() {
