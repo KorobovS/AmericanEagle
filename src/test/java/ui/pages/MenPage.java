@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -24,18 +25,8 @@ public class MenPage extends BasePage {
     @Step("Кликаю по товару под номером {numberInProductArray}")
     public ProductPage productClick(int numberInProductArray) {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        menLinkClick();
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         WebElement product = listProducts.get(numberInProductArray);
         js.executeScript("arguments[0].scrollIntoView(true);", product);

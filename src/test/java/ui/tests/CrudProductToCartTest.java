@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ui.pages.CartPage;
 import ui.pages.HomePage;
 import ui.utils.BaseTest;
+import ui.utils.TestDate;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 
@@ -15,22 +16,23 @@ import static io.qameta.allure.SeverityLevel.CRITICAL;
 public class CrudProductToCartTest extends BaseTest {
 
     @Test
-    @Description("Добавляю товар в корзину")
+    @Description("Добавляю товар в корзину и проверяю соответствие характеристик товара на витрине и в корзине")
     @Severity(CRITICAL)
     @Tag("Smoke")
     public void testAddProductToCart() {
 
         Allure.step("Добавляю товар в корзину");
-        String actualH1 = new HomePage(getDriver())
+        CartPage cartPage = new HomePage(getDriver())
                 .menLinkClick()
                 .productClick(1)
                 .sizeFirstClick()
                 .addToBagButtonClick()
-                .goToCartPage()
-                .getH1();
+                .goToCartPage();
 
         Allure.step("Проверяю актуальный Н1");
-        Assert.assertEquals(actualH1, "Shopping Bag");
+        Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
+        Allure.step("Проверяю характеристики товара на ветрине и в корзине");
+        Assert.assertEquals(TestDate.productOnDisplay, TestDate.productOnCart);
     }
 
     @Test

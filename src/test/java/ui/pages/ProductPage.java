@@ -1,5 +1,6 @@
 package ui.pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,8 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.utils.TestDate;
 
-import java.time.Duration;
+import static ui.utils.TestDate.*;
 
 public class ProductPage extends BasePage {
 
@@ -19,10 +21,10 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//ul[@role='menu']/li/a")
     private WebElement sizeFirst;
 
-    @FindBy(xpath = "//button[@data-test-btn='addToBag']")
+    @FindBy(xpath = "//button[@name='addToBag']")
     private WebElement addToBagButton;
 
-    @FindBy(xpath = "//div[@aria-label='Size']/span")
+    @FindBy(xpath = "//div[@aria-label='Size']/span[@class='dropdown-text']")
     private WebElement sizes;
 
     @FindBy(xpath = "//div[@class='modal-dialog']//button[@name='viewBag']")
@@ -34,20 +36,19 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//div[@class='modal-body']")
     private WebElement modal;
 
+    @FindBy(xpath = "//div[@class='modal-dialog']")
+    private WebElement modalWindow;
+
+    @FindBy(xpath = "//div[contains(@class, 'cart-item-info-container')]")
+    private WebElement productInCart;
+
     @Step("Кликаю по первому размеру")
     public ProductPage sizeFirstClick() {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         wait.until(ExpectedConditions.elementToBeClickable(sizes));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", sizes);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(sizes)).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(sizeFirst)).click();
 
         return new ProductPage(driver);
@@ -56,8 +57,12 @@ public class ProductPage extends BasePage {
     @Step("Кликаю по кнопке добавить в корзину")
     public ProductPage addToBagButtonClick() {
 
-        addToBagButton.click();
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='modal-dialog']"))));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", addToBagButton);
+        wait.until(ExpectedConditions.elementToBeClickable(addToBagButton)).click();
+        wait.until(ExpectedConditions.visibilityOf(modalWindow));
+
+        productOnDisplay = setProductOnDisplay(driver);
 
         return new ProductPage(driver);
     }
@@ -67,11 +72,10 @@ public class ProductPage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(modal));
         wait.until(ExpectedConditions.elementToBeClickable(viewBagButton)).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        wait.until(ExpectedConditions.visibilityOf(productInCart));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", productInCart);
+        productOnCart = setProductOnCart(driver);
 
         return new CartPage(driver);
     }
@@ -81,11 +85,11 @@ public class ProductPage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(modal));
         wait.until(ExpectedConditions.elementToBeClickable(closeModal)).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return this;
     }

@@ -32,7 +32,7 @@ public class BasePage {
     @FindBy(id = "ember4")
     private WebElement cartIcon;
 
-    @FindBy(xpath = "//a[@data-text='Men']")
+    @FindBy(xpath = "//div/div[@data-testid='desktop-megamenu']//a[contains(text(), 'Men')]")
     private WebElement menLink;
 
     @FindBy(xpath = "//div[@class='modal-body']")
@@ -47,6 +47,7 @@ public class BasePage {
     @Step("Кликаю ссылку 'Men'")
     public MenPage menLinkClick() {
 
+        wait.until(ExpectedConditions.elementToBeClickable(menLink));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
         js.executeScript("arguments[0].click();", menLink);
