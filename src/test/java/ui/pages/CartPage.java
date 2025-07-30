@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
+import static ui.utils.TestDate.productOnCart;
+import static ui.utils.TestDate.setProductOnCart;
+
 public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
@@ -38,10 +41,15 @@ public class CartPage extends BasePage {
     @FindAll(@FindBy(xpath = "//ul[@data-testid='commerce-items']/li"))
     private List<WebElement> arrayProduct;
 
+    @FindBy(xpath = "//div[contains(@class, 'cart-item-info-container')]")
+    private WebElement productInCart;
+
     @Step("Нажимаю ссылку edit в корзине")
     public CartPage clickLinkEdit() {
 
+        wait.until(ExpectedConditions.visibilityOf(productInCart));
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", productInCart);
         js.executeScript("arguments[0].scrollIntoView(true);", linkEdit);
         linkEdit.click();
 
@@ -51,6 +59,7 @@ public class CartPage extends BasePage {
     @Step("Нажимаю ссылку remove в корзине")
     public CartPage clickLinkRemove() {
 
+        wait.until(ExpectedConditions.elementToBeClickable(linkRemove));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", linkRemove);
         linkRemove.click();
@@ -69,8 +78,7 @@ public class CartPage extends BasePage {
     @Step("Меняю размер продукта в корзине")
     public CartPage updateSize() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(size));
-        size.click();
+        wait.until(ExpectedConditions.elementToBeClickable(size)).click();
         updateField(size, "//ul[@role='menu']/li/a");
 
         return this;
@@ -99,17 +107,14 @@ public class CartPage extends BasePage {
         js.executeScript("arguments[0].click();", buttonUpdateBag);
         js.executeScript("window.scrollTo(0, 0)");
 
+        productOnCart = setProductOnCart(driver);
+
         return this;
     }
 
     @Step("Меняю {field} продукта в корзине")
     public void updateField(WebElement field, String location) {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         wait.until(ExpectedConditions.elementToBeClickable(field));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", field);
@@ -123,7 +128,8 @@ public class CartPage extends BasePage {
     public CartPage updateProductToCart(int numberProductToCart) {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement product = driver.findElement(By.xpath(String.format("(//ul[@data-testid='commerce-items']/li//button[@name='editCommerceItem'])[%s]", numberProductToCart)));
+        WebElement product = driver.findElement(By.xpath(String.format("(//ul[@data-testid='commerce-items']/li//button[@name='editCommerceItem'])[%s]", numberProductToCart - 1)));
+        wait.until(ExpectedConditions.elementToBeClickable(product));
         js.executeScript("arguments[0].scrollIntoView(true);", product);
         product.click();
         updateColor();
@@ -137,22 +143,13 @@ public class CartPage extends BasePage {
     @Step("Удаляю {numberProductToCart} продукт в корзине")
     public CartPage removeProductToCart(int numberProductToCart) {
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
         WebElement product = driver.findElement(By.xpath(String.format("(//ul[@data-testid='commerce-items']/li//button[@name='removeCommerceItem'])[%s]", numberProductToCart)));
+        wait.until(ExpectedConditions.visibilityOf(product));
         js.executeScript("arguments[0].scrollIntoView(true);", product);
         wait.until(ExpectedConditions.elementToBeClickable(product)).click();
         js.executeScript("window.scrollTo(0, 0)");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
         return this;
     }

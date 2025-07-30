@@ -40,7 +40,7 @@ public class TestDate {
         String quantity = driver.findElement(By.xpath("//div[contains(@class, 'cart-item-quantity')]"))
                 .getText()
                 .replace("Qty: ", "");
-        String price = driver.findElement(By.xpath("//div[contains(@class, 'cart-item-price')]/span"))
+        String price = driver.findElement(By.xpath("//div[contains(@class, 'cart-item-price')]//span"))
                 .getText();
 
         return new Product(color, size, quantity, price);

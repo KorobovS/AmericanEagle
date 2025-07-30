@@ -7,9 +7,10 @@ import org.testng.annotations.Test;
 import ui.pages.CartPage;
 import ui.pages.HomePage;
 import ui.utils.BaseTest;
-import ui.utils.TestDate;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static ui.utils.TestDate.productOnCart;
+import static ui.utils.TestDate.productOnDisplay;
 
 @Owner("KorobovS")
 @Feature("UI")
@@ -25,6 +26,7 @@ public class CrudProductToCartTest extends BaseTest {
         CartPage cartPage = new HomePage(getDriver())
                 .menLinkClick()
                 .productClick(1)
+                .canselNotifyMe()
                 .sizeFirstClick()
                 .addToBagButtonClick()
                 .goToCartPage();
@@ -32,7 +34,7 @@ public class CrudProductToCartTest extends BaseTest {
         Allure.step("Проверяю актуальный Н1");
         Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
         Allure.step("Проверяю характеристики товара на ветрине и в корзине");
-        Assert.assertEquals(TestDate.productOnDisplay, TestDate.productOnCart);
+        Assert.assertEquals(productOnDisplay, productOnCart);
     }
 
     @Test
@@ -42,18 +44,19 @@ public class CrudProductToCartTest extends BaseTest {
     public void testUpdateProductToCart() {
 
         Allure.step("Обновляю данные о товаре в корзине");
-        String actualH1 = new HomePage(getDriver())
+        CartPage cartPage = new HomePage(getDriver())
                 .addProductToCart(1)
                 .goToCart()
                 .clickLinkEdit()
                 .updateColor()
                 .updateSize()
                 .updateQuantity()
-                .clickButtonUpdateBag()
-                .getH1();
+                .clickButtonUpdateBag();
 
         Allure.step("Проверяю актуальный Н1");
-        Assert.assertEquals(actualH1, "Shopping Bag");
+        Assert.assertEquals(cartPage.getH1(), "Shopping Bag");
+        Allure.step("Проверяю изменение характеристик товара после обновления");
+        Assert.assertNotEquals(productOnDisplay, productOnCart);
     }
 
     @Test

@@ -1,14 +1,11 @@
 package ui.pages;
 
-import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ui.utils.TestDate;
 
 import static ui.utils.TestDate.*;
 
@@ -42,13 +39,17 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'cart-item-info-container')]")
     private WebElement productInCart;
 
+    @FindBy(xpath = "//button[contains(@class, 'qa-btn-cancel')]")
+    private WebElement canselButton;
+
     @Step("Кликаю по первому размеру")
     public ProductPage sizeFirstClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(sizes));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", sizes);
-        wait.until(ExpectedConditions.elementToBeClickable(sizes)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(sizes)).click();
+        js.executeScript("arguments[0].click();", sizes);
         wait.until(ExpectedConditions.elementToBeClickable(sizeFirst)).click();
 
         return new ProductPage(driver);
@@ -75,6 +76,7 @@ public class ProductPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(productInCart));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", productInCart);
+
         productOnCart = setProductOnCart(driver);
 
         return new CartPage(driver);
@@ -85,12 +87,19 @@ public class ProductPage extends BasePage {
 
         wait.until(ExpectedConditions.elementToBeClickable(modal));
         wait.until(ExpectedConditions.elementToBeClickable(closeModal)).click();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
 
         return this;
+    }
+
+    @Step("Закрыть окно 'оповещение о появлении твого размера'")
+    public ProductPage canselNotifyMe() {
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(canselButton)).click();
+        } catch (Exception ignored) {
+
+        } finally {
+            return new ProductPage(driver);
+        }
     }
 }
