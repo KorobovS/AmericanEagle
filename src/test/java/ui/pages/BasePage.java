@@ -1,9 +1,7 @@
 package ui.pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,7 +24,7 @@ public class BasePage {
     @FindBy(xpath = "//a[@class='clickable qa-show-sidetray-account sidetray-account']/..")
     private WebElement accountIcon;
 
-    @FindBy(id = "ember3")
+    @FindBy(xpath = "//a[@id='ember3']")
     private WebElement favoritesIcon;
 
     @FindBy(id = "ember4")
@@ -58,7 +56,12 @@ public class BasePage {
     @Step("Кликаю иконку 'Search")
     public WindowSearch searchIconClick() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollTo(0, 0)");
+        js.executeScript("arguments[0].click();", searchIcon);
+
+//        wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
 
         return new WindowSearch(driver);
     }
@@ -74,7 +77,7 @@ public class BasePage {
     @Step("Кликаю иконку 'Favorites'")
     public FavoritesPage favoritesIconClick() {
 
-        favoritesIcon.click();
+        wait.until(ExpectedConditions.elementToBeClickable(favoritesIcon)).click();
 
         return new FavoritesPage(driver);
     }

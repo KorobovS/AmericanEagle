@@ -1,7 +1,6 @@
 package ui.utils;
 
 import io.qameta.allure.Allure;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import utils.LoggerUtil;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 public abstract class BaseTest {
 
@@ -48,24 +46,18 @@ public abstract class BaseTest {
     @AfterMethod
     protected void afterMethod(Method method, ITestResult testResult) {
 
-        if (testResult.getStatus() == ITestResult.FAILURE) {
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            File source = ts.getScreenshotAs(OutputType.FILE);
-            String destination = "screenshots/" + testResult.getName() + "_" + System.currentTimeMillis() + ".png";
-            try {
-                FileUtils.copyFile(source, new File(destination));
-                System.out.println("Скриншот сохранен в: " + destination);
-            } catch (IOException e) {
-                System.err.println("Ошибка при сохранении скриншота: " + e.getMessage());
-            }
-        }
-
         if (!testResult.isSuccess()) {
             Allure.addAttachment(
                     "screenshot.png",
                     "image/png",
                     new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES)),
                     "png");
+
+            Allure.addAttachment(
+                    "Page HTML",
+                    "text/html",
+                    Objects.requireNonNull(getDriver().getPageSource()),
+                    ".html");
         }
 
         closeDriver();
