@@ -30,7 +30,7 @@ public class BasePage {
     @FindBy(id = "ember4")
     private WebElement cartIcon;
 
-    @FindBy(xpath = "//div/div[@data-testid='desktop-megamenu']//a[contains(text(), 'Men')]")
+    @FindBy(xpath = "//a[@data-text='Men']")
     private WebElement menLink;
 
     @FindBy(xpath = "//div[@class='modal-body']")
@@ -70,8 +70,6 @@ public class BasePage {
     public WindowAccount accountIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(accountIcon)).click();
-
-        return new WindowAccount(driver);
     }
 
     @Step("Кликаю иконку 'Favorites'")
