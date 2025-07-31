@@ -1,7 +1,10 @@
 package ui.pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,7 +27,7 @@ public class BasePage {
     @FindBy(xpath = "//a[@class='clickable qa-show-sidetray-account sidetray-account']/..")
     private WebElement accountIcon;
 
-    @FindBy(xpath = "//a[@id='ember3']")
+    @FindBy(id = "ember3")
     private WebElement favoritesIcon;
 
     @FindBy(id = "ember4")
@@ -42,10 +45,9 @@ public class BasePage {
     @FindBy(xpath = "//h1")
     private WebElement h1;
 
-    @Step("Кликаю ссылку 'Men'")
+    @Step("Кликаю ссылку Men")
     public MenPage menLinkClick() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(menLink));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
         js.executeScript("arguments[0].click();", menLink);
@@ -53,34 +55,36 @@ public class BasePage {
         return new MenPage(driver);
     }
 
-    @Step("Кликаю иконку 'Search")
+    @Step("Кликаю иконку поиска")
     public WindowSearch searchIconClick() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(searchIcon));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("window.scrollTo(0, 0)");
-        js.executeScript("arguments[0].click();", searchIcon);
-
-//        wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(searchIcon)).click();
 
         return new WindowSearch(driver);
     }
 
-    @Step("Кликаю иконку 'Account'")
+    @Step("Кликаю иконку аккаунта")
     public WindowAccount accountIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(accountIcon)).click();
+
+        return new WindowAccount(driver);
     }
 
-    @Step("Кликаю иконку 'Favorites'")
+    @Step("Кликаю иконку понравившееся")
     public FavoritesPage favoritesIconClick() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(favoritesIcon)).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        favoritesIcon.click();
 
         return new FavoritesPage(driver);
     }
 
-    @Step("Кликаю иконку 'Cart'")
+    @Step("Кликаю иконку корзины")
     public CartPage cartIconClick() {
 
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
