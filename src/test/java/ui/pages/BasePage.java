@@ -33,7 +33,7 @@ public class BasePage {
     @FindBy(id = "ember4")
     private WebElement cartIcon;
 
-    @FindBy(xpath = "//a[@data-text='Men']")
+    @FindBy(xpath = "//a[text()='Men']")
     private WebElement menLink;
 
     @FindBy(xpath = "//div[@class='modal-body']")
