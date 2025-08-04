@@ -68,19 +68,21 @@
 
 Все тесты (кроме дефектных):
 
-`     mvn clean test       `
+   ```bash     
+       mvn clean test       
+   ```
 
 Только API-тесты (кроме дефектных):
 
-   `
-      mvn clean test -Dsuite=api
-   `
+   ```bash
+       mvn clean test -Dsuite=api
+   ```
 
 Только UI-тесты (кроме дефектных):
 
-   `
-      mvn clean test -Dsuite=ui
-   `
+   ```bash
+       mvn clean test -Dsuite=ui
+   ```
 
 ---
 
